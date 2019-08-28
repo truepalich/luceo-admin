@@ -16,6 +16,20 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+
+    <v-card
+      max-width="344"
+      class="mx-auto"
+    >
+      <v-card-title>I'm a title</v-card-title>
+      <v-card-text>I'm card text</v-card-text>
+      <v-card-actions>
+        <v-btn text>Click</v-btn>
+      </v-card-actions>
+    </v-card>
+
+
+
   </div>
 </template>
 
