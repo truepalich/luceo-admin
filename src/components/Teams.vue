@@ -1,6 +1,7 @@
 <template>
     <div>
-      <h1>Teams</h1>
+      <h2>Teams</h2>
+      <p>Coming soon...</p>
     </div>
 </template>
 

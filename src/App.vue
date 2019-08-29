@@ -10,7 +10,7 @@
 
     <v-content>
 
-      <v-tabs>
+      <v-tabs color="" background-color="indigo lighten-5">
         <v-tab :to="{ name: 'Customers' }">Customers</v-tab>
         <v-tab :to="{ name: 'Teams' }">Teams</v-tab>
         <v-tab :to="{ name: 'Users' }">Users</v-tab>

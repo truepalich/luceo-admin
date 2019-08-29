@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Customers</h1>
+    <h2>Customers</h2>
+    <p>Coming soon...</p>
   </div>
 </template>
 

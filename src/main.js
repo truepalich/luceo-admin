@@ -8,10 +8,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify,{
-  // theme: {
-  //   primary: '#ff7043',
-  //   secondary: '#207fb5'
-  // },
+  theme: {
+    // primary: '#ff7043',
+    // secondary: '#207fb5'
+  },
   icons: {
     iconfont: 'mdi'
   }
