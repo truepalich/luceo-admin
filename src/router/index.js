@@ -11,9 +11,9 @@ import Apps from '../components/Apps'
 Vue.use(Router)
 
 export default new Router({
-  hashbang: false,
-  base: '/',
-  mode: 'history',
+  // hashbang: false,
+  // base: '/',
+  // mode: 'history',
   routes: [
     {
       path: '/',
