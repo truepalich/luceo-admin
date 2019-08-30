@@ -5,7 +5,27 @@
       color="indigo"
       dark
     >
-      <v-toolbar-title>Luceo Admin</v-toolbar-title>
+      <v-toolbar-title><v-icon class="mr-1">mdi-view-dashboard</v-icon>Luceo Admin</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+      <v-avatar color="indigo lighten-1" class="mr-1">
+        <v-icon dark>mdi-account-circle</v-icon>
+      </v-avatar>
+      <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-content>
