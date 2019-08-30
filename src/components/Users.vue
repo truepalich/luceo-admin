@@ -4,9 +4,6 @@
     <v-card color="white" class="mb-4 filter-custom-box">
       <v-card-text class="pa-0">
         <v-row align="center">
-          <!--<v-col cols="12" md="2" class="py-0">-->
-            <!--<v-toolbar-title>Users</v-toolbar-title>-->
-          <!--</v-col>-->
           <v-col cols="12" md="3" class="py-0">
             <div class="pl-4">
               <div style="height: 48px;"><h1>Users</h1></div>
@@ -64,7 +61,6 @@
     <v-data-table
       :headers="headers"
       :items="users"
-      sort-by="calories"
       class="elevation-1"
       show-select
     >
@@ -464,10 +460,6 @@
             </v-card>
           </v-dialog>
           <!--dialogCustomers-->
-
-
-
-        </v-toolbar>
       </template>
 
       <template v-slot:item.headshot="{ item }">
@@ -942,9 +934,6 @@
 </script>
 
 <style scoped>
-  .filter-custom-box {
-
-  }
   .v-data-table__wrapper a:hover {
     text-decoration: underline;
   }
