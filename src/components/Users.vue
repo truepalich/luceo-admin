@@ -652,7 +652,7 @@
             this.users = [
               {
                 id: 1,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                headshot: '',
                 name: 'Jason Oner',
                 firstName: 'Jason',
                 lastName: 'Oner',
@@ -671,7 +671,7 @@
               },
               {
                 id: 2,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                headshot: '',
                 name: 'Travis Howard',
                 firstName: 'Travis',
                 lastName: 'Howard',
@@ -686,7 +686,7 @@
               },
               {
                 id: 3,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                headshot: '',
                 name: 'Alli Connors',
                 firstName: 'Alli',
                 lastName: 'Connors',
@@ -703,7 +703,7 @@
               },
               {
                 id: 4,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+                headshot: '',
                 name: 'Cindy Baker',
                 firstName: 'Cindy',
                 lastName: 'Baker',
@@ -718,7 +718,7 @@
               },
               {
                 id: 5,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+                headshot: '',
                 name: 'Alex Soborsky',
                 firstName: 'Alex',
                 lastName: 'Soborsky',
@@ -754,7 +754,7 @@
               },
               {
                 id: 7,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                headshot: '',
                 name: 'Travis Howard',
                 firstName: 'Travis',
                 lastName: 'Howard',
@@ -786,7 +786,7 @@
               },
               {
                 id: 9,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+                headshot: '',
                 name: 'Cindy Baker',
                 firstName: 'Cindy',
                 lastName: 'Baker',
@@ -818,7 +818,7 @@
               },
               {
                 id: 11,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                headshot: '',
                 name: 'Jason Oner',
                 firstName: 'Jason',
                 lastName: 'Oner',
@@ -852,7 +852,7 @@
               },
               {
                 id: 13,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                headshot: '',
                 name: 'Alli Connors',
                 firstName: 'Alli',
                 lastName: 'Connors',
@@ -869,7 +869,7 @@
               },
               {
                 id: 14,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+                headshot: '',
                 name: 'Cindy Baker',
                 firstName: 'Cindy',
                 lastName: 'Baker',
@@ -884,7 +884,7 @@
               },
               {
                 id: 15,
-                headshot: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+                headshot: '',
                 name: 'Alex Soborsky',
                 firstName: 'Alex',
                 lastName: 'Soborsky',
