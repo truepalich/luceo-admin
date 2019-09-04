@@ -4,53 +4,61 @@
     <v-card color="white" class="mb-4 filter-custom-box">
       <v-card-text class="pa-0">
         <v-row align="center">
-          <v-col cols="12" md="3" class="py-0">
+          <v-col cols="12" md="2">
             <div class="pl-4">
-              <div style="height: 48px;"><h1>Users</h1></div>
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
+              <h1>Users</h1>
             </div>
           </v-col>
-          <v-col cols="12" md="2" class="py-0">
+          <v-col cols="12" md="2">
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Team"
             ></v-select>
+          </v-col>
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Status"
             ></v-select>
           </v-col>
-          <v-col cols="12" md="2" class="py-0">
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Customer"
             ></v-select>
+          </v-col>
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Apps"
             ></v-select>
           </v-col>
-          <v-col cols="12" md="2" class="py-0">
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Group"
             ></v-select>
+          </v-col>
+          <v-col cols="12" md="1">
             <v-select
               :items="filterSearchItems"
               label="Role"
             ></v-select>
           </v-col>
-          <v-col cols="12" md="3" class="py-0 align-center justify-end d-flex">
+
+          <v-col cols="12" md="2" class="align-center justify-end d-flex">
             <div class="pr-2">
-              <v-btn color="orange" @click="showAddUser" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
-              <v-btn color="blue-grey" class="ma-2 white--text" fab><v-icon>mdi-cloud-upload</v-icon></v-btn>
-              <v-btn color="indigo" class="ma-2 white--text">Template</v-btn>
+              <v-btn color="indigo" small class="ma-2 white--text ">Template</v-btn>
+              <v-btn color="blue-grey" class="ma-2 white--text ml-0" fab><v-icon>mdi-cloud-upload</v-icon></v-btn>
+              <v-btn color="orange" @click="showAddUser" class="ma-2 white--text ml-0" fab><v-icon>mdi-plus</v-icon></v-btn>
             </div>
           </v-col>
         </v-row>

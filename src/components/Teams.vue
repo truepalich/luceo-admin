@@ -187,7 +187,7 @@
 
 
           <!--dialogColorSettings-->
-          <v-dialog v-model="dialogColorSettings" max-width="500px">
+          <v-dialog v-model="dialogColorSettings" max-width="600px">
             <v-card>
               <v-card-title class="headline grey lighten-2">
                 <span class="headline">Color settings</span>
@@ -201,19 +201,19 @@
                     </v-col>
                     <v-col cols="12" sm="6">
                       <b>Primary:</b>
-                      <v-color-picker hide-canvas hide-inputs></v-color-picker>
+                      <v-color-picker hide-canvas mode="hexa"></v-color-picker>
                     </v-col>
                     <v-col cols="12" sm="6">
                       <b>Primary (Dark):</b>
-                      <v-color-picker hide-canvas hide-inputs></v-color-picker>
+                      <v-color-picker hide-canvas mode="hexa"></v-color-picker>
                     </v-col>
                     <v-col cols="12" sm="6">
                       <b>Secondary:</b>
-                      <v-color-picker hide-canvas hide-inputs></v-color-picker>
+                      <v-color-picker hide-canvas mode="hexa"></v-color-picker>
                     </v-col>
                     <v-col cols="12" sm="6">
                       <b>Tertiary:</b>
-                      <v-color-picker hide-canvas hide-inputs></v-color-picker>
+                      <v-color-picker hide-canvas mode="hexa"></v-color-picker>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -302,7 +302,7 @@
 
                           <v-list-item-action>
                             <v-btn icon>
-                              <v-icon color="grey lighten-1">mdi-delete</v-icon>
+                              <v-icon color="primary">mdi-delete</v-icon>
                             </v-btn>
                           </v-list-item-action>
 
@@ -330,6 +330,35 @@
             </v-card>
           </v-dialog>
           <!--dialogCustomLocations-->
+
+
+          <!--dialogTeamProfile-->
+          <v-dialog v-model="dialogTeamProfile" max-width="500px">
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <span class="headline">Team Profile</span>
+              </v-card-title>
+
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      Cooming soon...
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <div class="flex-grow-1"></div>
+                <v-btn color="blue darken-1" text @click="dialogTeamProfile = false">Cancel</v-btn>
+                <!--<v-btn color="primary" @click="dialogPlayerProfile = false">Save</v-btn>-->
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!--dialogTeamProfile-->
 
 
         </template>
@@ -361,7 +390,7 @@
         </template>
 
         <template v-slot:item.teamProfile="{ item }">
-          <a target="_blank" :href="item.teamProfile">View</a>
+          <a @click="dialogTeamProfile = true">View</a>
         </template>
 
         <template v-slot:item.luceoSetup="{ item }">
@@ -371,10 +400,6 @@
         <template v-slot:item.customer="{ item }">
           <a @click="dialogCustomers = true">{{ item.customer }}</a>
         </template>
-
-        <!--<template v-slot:item.name="{ item }">-->
-          <!--<a @click="dialogCustomer = true && (dialogCustomerData.name = item.name)">{{ item.name }}</a>-->
-        <!--</template>-->
 
       </v-data-table>
 
@@ -395,6 +420,7 @@
         dialogColorSettings: false,
         dialogTeamInfo: false,
         dialogCustomLocations: false,
+        dialogTeamProfile: false,
 
         checkbox3: true,
         checkbox4: true,
