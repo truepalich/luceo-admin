@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-card color="white" class="mb-4 filter-custom-box">
+      <v-card class="mb-4 filter-custom-box">
         <v-card-text class="pa-0">
           <v-row align="center">
             <v-col cols="12" md="2">
@@ -30,7 +30,7 @@
             </v-col>
             <v-col cols="12" md="4" class="align-center justify-end d-flex">
               <div class="pr-2">
-                <v-btn color="orange" @click="showAppInfo" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+                <v-btn color="filterBut1" @click="showAppInfo" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
               </div>
             </v-col>
           </v-row>
@@ -48,7 +48,7 @@
           <!--dialogAvatar-->
           <v-dialog v-model="dialogAvatar" max-width="500px">
             <v-card>
-              <v-card-title class="headline grey lighten-2">
+              <v-card-title class="headline dialogHeader">
                 <span class="headline">Change app avatar</span>
               </v-card-title>
 
@@ -72,8 +72,8 @@
 
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="dialogAvatar = false">Cancel</v-btn>
-                <v-btn color="primary" @click="dialogAvatar = false">Save</v-btn>
+                <v-btn color="dialogBut1" text @click="dialogAvatar = false">Cancel</v-btn>
+                <v-btn color="dialogBut2" @click="dialogAvatar = false">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -83,7 +83,7 @@
           <!--dialogAppInfo-->
           <v-dialog v-model="dialogAppInfo" max-width="500px">
             <v-card>
-              <v-card-title class="headline grey lighten-2">
+              <v-card-title class="headline dialogHeader">
                 <span class="headline" v-if="dialogAppInfoData.name">Edit App: {{ dialogAppInfoData.name }}</span>
                 <span class="headline" v-else>Add App</span>
               </v-card-title>
@@ -126,8 +126,8 @@
 
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="dialogAppInfo = false">Cancel</v-btn>
-                <v-btn color="primary" @click="dialogAppInfo = false">Save</v-btn>
+                <v-btn color="dialogBut1" text @click="dialogAppInfo = false">Cancel</v-btn>
+                <v-btn color="dialogBut2" @click="dialogAppInfo = false">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -137,7 +137,7 @@
           <!--dialogCustomPermissions-->
           <v-dialog v-model="dialogCustomPermissions" max-width="600px">
             <v-card>
-              <v-card-title class="headline grey lighten-2">
+              <v-card-title class="headline dialogHeader">
                 <span class="headline">Custom Permissions: {{ dialogCustomPermissionsData.name }}</span>
               </v-card-title>
 
@@ -163,7 +163,7 @@
                             <td>{{ item.internalKey }}</td>
                             <td>
                               <v-btn icon>
-                                <v-icon color="primary">mdi-delete</v-icon>
+                                <v-icon color="selectedColors">mdi-delete</v-icon>
                               </v-btn>
                             </td>
                           </tr>
@@ -176,7 +176,7 @@
                       <v-text-field label="Label"></v-text-field>
                       <v-text-field label="Description"></v-text-field>
                       <v-text-field label="InternalKey"></v-text-field>
-                      <v-btn color="primary">Add</v-btn>
+                      <v-btn color="dialogBut4">Add</v-btn>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -186,8 +186,8 @@
 
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="dialogCustomPermissions = false">Cancel</v-btn>
-                <v-btn color="primary" @click="dialogCustomPermissions = false">Save</v-btn>
+                <v-btn color="dialogBut1" text @click="dialogCustomPermissions = false">Cancel</v-btn>
+                <v-btn color="dialogBut2" @click="dialogCustomPermissions = false">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -200,18 +200,18 @@
           <v-avatar v-if="item.headshot" size="36px" @click="dialogAvatar = true && (dialogAvatarData.userName = item.name)" style="cursor: pointer">
             <img :src="item.headshot" alt="avatar">
           </v-avatar>
-          <v-avatar v-else color="grey" size="36px" @click="dialogAvatar = true && (dialogAvatarData.userName = item.name)" style="cursor: pointer">
+          <v-avatar v-else color="orange darken-1" size="36px" @click="dialogAvatar = true && (dialogAvatarData.userName = item.name)" style="cursor: pointer">
             <v-icon dark>mdi-account-circle</v-icon>
           </v-avatar>
-          <v-icon color="primary" small @click="dialogAvatar = true && (dialogAvatarData.userName = item.name)">mdi-pencil</v-icon>
+          <v-icon color="links" small @click="dialogAvatar = true && (dialogAvatarData.userName = item.name)">mdi-pencil</v-icon>
         </template>
 
         <template v-slot:item.name="{ item }">
-          <a @click="dialogAppInfo = true && (dialogAppInfoData.name = item.name)">{{ item.name }}</a>
+          <a class="links--text" @click="dialogAppInfo = true && (dialogAppInfoData.name = item.name)">{{ item.name }}</a>
         </template>
 
         <template v-slot:item.customPermissions="{ item }">
-          <a @click="dialogCustomPermissions = true && (dialogCustomPermissionsData.name = item.name)">View/Edit</a>
+          <a class="links--text" @click="dialogCustomPermissions = true && (dialogCustomPermissionsData.name = item.name)">View/Edit</a>
         </template>
 
       </v-data-table>

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-card color="white" class="mb-4 filter-custom-box">
+      <v-card class="mb-4 filter-custom-box">
         <v-card-text class="pa-0">
           <v-row align="center">
             <v-col cols="12" md="2">
@@ -24,7 +24,7 @@
             </v-col>
             <v-col cols="12" md="6" class="align-center justify-end d-flex">
               <div class="pr-2">
-                <v-btn color="orange" @click="showAddGroupInfo" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+                <v-btn color="filterBut1" @click="showAddGroupInfo" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
               </div>
             </v-col>
           </v-row>
@@ -42,7 +42,7 @@
 
           <v-dialog v-model="dialogGroupsInfo" max-width="500px">
             <v-card>
-              <v-card-title class="headline grey lighten-2">
+              <v-card-title class="headline dialogHeader">
                 <span class="headline" v-if="dialogGroupsInfoData.name">Edit Group: {{ dialogGroupsInfoData.name }}</span>
                 <span class="headline" v-else>Add Group</span>
               </v-card-title>
@@ -67,8 +67,8 @@
 
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="dialogGroupsInfo = false">Cancel</v-btn>
-                <v-btn color="primary" @click="dialogGroupsInfo = false">Save</v-btn>
+                <v-btn color="dialogBut1" text @click="dialogGroupsInfo = false">Cancel</v-btn>
+                <v-btn color="dialogBut2" @click="dialogGroupsInfo = false">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -76,7 +76,7 @@
           <!--dialogMembers-->
           <v-dialog v-model="dialogMembers" max-width="700px">
             <v-card>
-              <v-card-title class="headline grey lighten-2">
+              <v-card-title class="headline dialogHeader">
                 <span class="headline">Add/Edit Members</span>
               </v-card-title>
 
@@ -86,15 +86,15 @@
                     <b>{{ dialogMembersData.name }} | Member</b>
                   </v-col>
                   <v-row>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 1 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 2 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 3 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 4 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 5 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Player 6 / Player"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox3" label="Coach 1 / Coach"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox4" label="Coach 2 / Coach"></v-checkbox></v-col>
-                    <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox5" label="Coach 3 / Coach"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 1 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 2 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 3 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 4 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 5 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 6 / Player"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  v-model="checkbox3" label="Coach 1 / Coach"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  v-model="checkbox4" label="Coach 2 / Coach"></v-checkbox></v-col>
+                    <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  v-model="checkbox5" label="Coach 3 / Coach"></v-checkbox></v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -103,22 +103,20 @@
 
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="dialogMembers = false">Cancel</v-btn>
-                <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+                <v-btn color="dialogBut1" text @click="dialogMembers = false">Cancel</v-btn>
+                <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
               </v-card-actions>
             </v-card>
           </v-dialog>
           <!--dialogMembers-->
-
-
         </template>
 
         <template v-slot:item.customer="{ item }">
-          <a @click="dialogGroupsInfo = true && (dialogGroupsInfoData.name = item.name)">{{ item.customer }}</a>
+          <a class="links--text" @click="dialogGroupsInfo = true && (dialogGroupsInfoData.name = item.name)">{{ item.customer }}</a>
         </template>
 
         <template v-slot:item.members="{ item }">
-          <a @click="dialogMembers = true && (dialogMembersData.name = item.name)">{{ item.members }} - edit</a>
+          <a class="links--text" @click="dialogMembers = true && (dialogMembersData.name = item.name)">{{ item.members }} - edit</a>
         </template>
       </v-data-table>
 

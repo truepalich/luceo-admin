@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <v-card color="white" class="mb-4 filter-custom-box">
+    <v-card class="mb-4 filter-custom-box">
       <v-card-text class="pa-0">
         <v-row align="center">
           <v-col cols="12" md="2">
@@ -25,7 +25,7 @@
           </v-col>
           <v-col cols="12" md="6" class="align-center justify-end d-flex">
             <div class="pr-2">
-              <v-btn color="orange" @click="showAddCustomer" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+              <v-btn color="filterBut1" @click="showAddCustomer" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
             </div>
           </v-col>
         </v-row>
@@ -42,7 +42,7 @@
         <!--dialogCustomer-->
         <v-dialog v-model="dialogCustomer" max-width="500px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline" v-if="dialogCustomerData.name">Edit Customer: {{ dialogCustomerData.name }}</span>
               <span class="headline" v-else>Add Customer</span>
             </v-card-title>
@@ -76,9 +76,9 @@
                           v-on="on"
                         ></v-text-field>
                       </template>
-                      <v-date-picker v-model="date" no-title scrollable>
+                      <v-date-picker v-model="date" no-title scrollable  color="selectedColors" >
                         <div class="flex-grow-1"></div>
-                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                        <v-btn text color="blue darken-1" @click="menu = false">Cancel</v-btn>
                         <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
                       </v-date-picker>
                     </v-menu>
@@ -92,8 +92,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogCustomer = false">Cancel</v-btn>
-              <v-btn color="primary" @click="dialogCustomer = false">Save</v-btn>
+              <v-btn color="dialogBut1" text @click="dialogCustomer = false">Cancel</v-btn>
+              <v-btn color="dialogBut2" @click="dialogCustomer = false">Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -103,7 +103,7 @@
         <!--dialogStatus-->
         <v-dialog v-model="dialogStatus" max-width="500px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline">Status</span>
             </v-card-title>
 
@@ -114,7 +114,7 @@
                     <b>{{ dialogStatusData.name }} | Status</b>
                   </v-col>
                   <v-col cols="12" sm="12">
-                    <b>Current status: <v-chip :color="dialogStatusData.status=='Active' ? 'green' : 'indigo lighten-2'" dark>{{ dialogStatusData.status }}</v-chip></b>
+                    <b>Current status: <v-chip :color="dialogStatusData.status=='Active' ? 'green' : 'blue-grey darken-1'" dark>{{ dialogStatusData.status }}</v-chip></b>
                   </v-col>
                 </v-row>
               </v-container>
@@ -124,8 +124,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogStatus = false">Cancel</v-btn>
-              <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+              <v-btn color="dialogBut1" text @click="dialogStatus = false">Cancel</v-btn>
+              <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -134,7 +134,7 @@
         <!--dialogActiveUsers-->
         <v-dialog v-model="dialogActiveUsers" max-width="700px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline">Active Users</span>
             </v-card-title>
 
@@ -144,20 +144,20 @@
                   <v-col cols="12" sm="12">
                     <b>{{ dialogActiveUsersData.name }} | Active Users</b>
                   </v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 1 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 2 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 3 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox v-model="checkbox5" label="Player 4 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 1 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 2 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 3 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox v-model="checkbox5" color="selectedColors" label="Player 4 / Player"></v-checkbox></v-col>
 
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox3" label="Coach 1 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox4" label="Coach 2 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Coach 3 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" v-model="checkbox3" label="Coach 1 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" v-model="checkbox4" label="Coach 2 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Coach 3 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors" label="Admin App 2"></v-checkbox></v-col>
                 </v-row>
               </v-container>
             </v-card-text>
@@ -166,8 +166,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogActiveUsers = false">Cancel</v-btn>
-              <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+              <v-btn color="dialogBut1" text @click="dialogActiveUsers = false">Cancel</v-btn>
+              <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -176,7 +176,7 @@
         <!--dialogAdminUsers-->
         <v-dialog v-model="dialogAdminUsers" max-width="700px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline">Admin Users</span>
             </v-card-title>
 
@@ -186,20 +186,20 @@
                   <v-col cols="12" sm="12">
                     <b>{{ dialogAdminUsersData.name }} | Admin Users</b>
                   </v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 1 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 2 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 3 / Player"></v-checkbox></v-col>
-                  <v-col cols="12" sm="12" class="py-0"><v-checkbox label="Player 4 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 1 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors"  label="Player 2 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors"  label="Player 3 / Player"></v-checkbox></v-col>
+                  <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors"  label="Player 4 / Player"></v-checkbox></v-col>
 
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox1" label="Coach 1 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox v-model="checkbox2" label="Coach 2 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Coach 3 / Coach"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 1"></v-checkbox></v-col>
-                  <v-col cols="12" sm="4" class="py-0"><v-checkbox label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  v-model="checkbox1" label="Coach 1 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  v-model="checkbox2" label="Coach 2 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 2"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Coach 3 / Coach"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 1"></v-checkbox></v-col>
+                  <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Admin App 2"></v-checkbox></v-col>
                 </v-row>
               </v-container>
             </v-card-text>
@@ -208,8 +208,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogAdminUsers = false">Cancel</v-btn>
-              <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+              <v-btn color="dialogBut1" text @click="dialogAdminUsers = false">Cancel</v-btn>
+              <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -218,7 +218,7 @@
         <!--dialogHubspotCompany-->
         <v-dialog v-model="dialogHubspotCompany" max-width="500px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline">HubSpot Company</span>
             </v-card-title>
 
@@ -236,8 +236,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogHubspotCompany = false">Cancel</v-btn>
-              <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+              <v-btn color="dialogBut1" text @click="dialogHubspotCompany = false">Cancel</v-btn>
+              <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -246,7 +246,7 @@
         <!--dialogTeams-->
         <v-dialog v-model="dialogTeams" max-width="500px">
           <v-card>
-            <v-card-title class="headline grey lighten-2">
+            <v-card-title class="headline dialogHeader">
               <span class="headline">Teams</span>
             </v-card-title>
 
@@ -264,8 +264,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="dialogTeams = false">Cancel</v-btn>
-              <!--<v-btn color="primary" @click="dialogStatus = false">Save</v-btn>-->
+              <v-btn color="dialogBut1" text @click="dialogTeams = false">Cancel</v-btn>
+              <!--<v-btn color="dialogBut2" @click="dialogStatus = false">Save</v-btn>-->
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -274,24 +274,24 @@
       </template>
 
       <template v-slot:item.name="{ item }">
-        <a @click="dialogCustomer = true && (dialogCustomerData.name = item.name)">{{ item.name }}</a>
+        <a class="links--text" @click="dialogCustomer = true && (dialogCustomerData.name = item.name)">{{ item.name }}</a>
       </template>
       <template v-slot:item.status="{ item }">
-        <v-chip @click="dialogStatus = true && (dialogStatusData.status = item.status, dialogStatusData.name = item.name)" :color="item.status=='Active' ? 'green' : 'indigo lighten-2'" dark>{{ item.status }}</v-chip>
+        <v-chip @click="dialogStatus = true && (dialogStatusData.status = item.status, dialogStatusData.name = item.name)" :color="item.status=='Active' ? 'green' : 'blue-grey darken-1'" dark>{{ item.status }}</v-chip>
       </template>
       <template v-slot:item.teams="{ item }">
         <div v-for="team in item.teams">
-          <a @click="dialogTeams = true">{{ team.name }}</a>
+          <a class="links--text" @click="dialogTeams = true">{{ team.name }}</a>
         </div>
       </template>
       <template v-slot:item.activeUsers="{ item }">
-        <a @click="dialogActiveUsers = true && (dialogActiveUsersData.name = item.name)">{{ item.activeUsers }}</a>
+        <a class="links--text" @click="dialogActiveUsers = true && (dialogActiveUsersData.name = item.name)">{{ item.activeUsers }}</a>
       </template>
       <template v-slot:item.adminUsers="{ item }">
-        <a @click="dialogAdminUsers = true && (dialogAdminUsersData.name = item.name)">{{ item.adminUsers }}</a>
+        <a class="links--text" @click="dialogAdminUsers = true && (dialogAdminUsersData.name = item.name)">{{ item.adminUsers }}</a>
       </template>
       <template v-slot:item.hubspotCompany="{ item }">
-        <a @click="dialogHubspotCompany = true">{{ item.hubspotCompany }}</a>
+        <a class="links--text" @click="dialogHubspotCompany = true">{{ item.hubspotCompany }}</a>
       </template>
 
     </v-data-table>
