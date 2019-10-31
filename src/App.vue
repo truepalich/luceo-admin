@@ -29,7 +29,9 @@
 
     <v-content>
 
-      <v-tabs >
+      <!--<Preloader></Preloader>-->
+
+      <v-tabs>
         <v-tab :to="{ name: 'Customers' }">Customers</v-tab>
         <v-tab :to="{ name: 'Teams' }">Teams</v-tab>
         <v-tab :to="{ name: 'Users' }">Users</v-tab>
@@ -43,14 +45,16 @@
     </v-content>
 
     <v-footer color="blue darken-1">
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import Preloader from "./components/Preloader";
   export default {
     name: 'app',
+    components: {Preloader},
     created: function () {
       this.$vuetify.theme.dark = true
     }

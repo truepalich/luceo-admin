@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '../components/Hello'
 
-import Users from '../components/Users'
-import Customers from '../components/Customers'
-import Groups from '../components/Groups'
-import Teams from '../components/Teams'
-import Apps from '../components/Apps'
+import Users from '../pages/Users'
+import Customers from '../pages/Customers'
+import Groups from '../pages/Groups'
+import Teams from '../pages/Teams'
+import Apps from '../pages/Apps'
 
 Vue.use(Router)
 
@@ -17,8 +16,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello,
       redirect: { name: 'Users' }
     },
     {
