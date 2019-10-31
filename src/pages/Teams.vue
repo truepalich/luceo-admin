@@ -41,13 +41,13 @@
         </template>
       </v-data-table>
 
-      <ComingSoonDialog :data="currentCustomerData"></ComingSoonDialog>
-      <LuceoSetupDialog :data="currentCustomerData"></LuceoSetupDialog>
-      <ColorSettingsDialog :data="currentCustomerData"></ColorSettingsDialog>
-      <CustomLocationsDialog :data="currentCustomerData"></CustomLocationsDialog>
-      <ChangeLogoDialog :data="currentCustomerData"></ChangeLogoDialog>
-      <ActiveUsersDialog :data="currentCustomerData"></ActiveUsersDialog>
-      <AddEditDialog :data="currentCustomerData"></AddEditDialog>
+      <ComingSoonDialog :data="currentTeamData"></ComingSoonDialog>
+      <LuceoSetupDialog :data="currentTeamData"></LuceoSetupDialog>
+      <ColorSettingsDialog :data="currentTeamData"></ColorSettingsDialog>
+      <CustomLocationsDialog :data="currentTeamData"></CustomLocationsDialog>
+      <ChangeLogoDialog :data="currentTeamData"></ChangeLogoDialog>
+      <ActiveUsersDialog :data="currentTeamData"></ActiveUsersDialog>
+      <AddEditDialog :data="currentTeamData"></AddEditDialog>
 
     </div>
 </template>
