@@ -16,7 +16,7 @@
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
       </template>
       <template v-slot:item.status="{ item }">
-        <v-chip @click.prevent="showDialogAndTransferEvent(item, 'show-status-dialog')" :color="item.status == 'Active' ? 'green' : 'blue-grey darken-1'" dark>{{ item.status }}</v-chip>
+        <v-chip @click.prevent="showDialogAndTransferEvent(item, 'show-status-dialog', $route.name)" :color="item.status == 'Active' ? 'green' : 'blue-grey darken-1'" dark>{{ item.status }}</v-chip>
       </template>
       <template v-slot:item.teams="{ item }">
         <div v-for="team in item.teams">
@@ -47,7 +47,7 @@
     import Filters from "../components/Filters";
     import AdminUsersDialog from "../components/customers/AdminUsersDialog";
     import ActiveUsersDialog from "../components/base/ActiveUsersDialog";
-    import StatusDialog from "../components/customers/StatusDialog";
+    import StatusDialog from "../components/base/StatusDialog";
     import ComingSoonDialog from "../components/base/ComingSoonDialog";
     import AddEditDialog from "../components/customers/AddEditDialog";
     export default {
@@ -99,7 +99,8 @@
       // },
 
       methods: {
-        showDialogAndTransferEvent (item, event) {
+        showDialogAndTransferEvent (item, event, routeName) {
+          item.routeName = routeName;
           this.currentCustomerData = item;
           this.$eventHub.$emit(event);
         },

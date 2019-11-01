@@ -1,55 +1,55 @@
 <template>
-    <div>
+  <div>
 
-      <Filters></Filters>
+    <Filters></Filters>
 
-      <v-data-table
-        :headers="headers"
-        :items="teams"
-        :loading="loading"
-        class="elevation-1"
-      >
-        <template v-slot:item.headshot="{ item }">
-          <v-avatar v-if="item.headshot" size="36px" @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')" style="cursor: pointer">
-            <img :src="item.headshot" alt="avatar">
-          </v-avatar>
-          <v-avatar v-else color="orange darken-1" size="36px" @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')" style="cursor: pointer">
-            <v-icon dark>mdi-account-circle</v-icon>
-          </v-avatar>
-          <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
-        </template>
-        <template v-slot:item.name="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
-        </template>
-        <template v-slot:item.activeUsers="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-active-users-dialog')">{{ item.activeUsers }}</a>
-        </template>
-        <template v-slot:item.customLocations="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-custom-locations-dialog')">View ({{ item.customLocations }})</a>
-        </template>
-        <template v-slot:item.colorSettings="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-color-settings-dialog')">XXX Setup</a>
-        </template>
-        <template v-slot:item.teamProfile="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-coming-soon-dialog')">View</a>
-        </template>
-        <template v-slot:item.luceoSetup="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-luceo-setup-dialog')">Setup/View</a>
-        </template>
-        <template v-slot:item.customer="{ item }">
-          <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-coming-soon-dialog')">{{ item.customer }}</a>
-        </template>
-      </v-data-table>
+    <v-data-table
+      :headers="headers"
+      :items="teams"
+      :loading="loading"
+      class="elevation-1"
+    >
+      <template v-slot:item.headshot="{ item }">
+        <v-avatar v-if="item.headshot" size="36px" @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')" style="cursor: pointer">
+          <img :src="item.headshot" alt="avatar">
+        </v-avatar>
+        <v-avatar v-else color="orange darken-1" size="36px" @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')" style="cursor: pointer">
+          <v-icon dark>mdi-account-circle</v-icon>
+        </v-avatar>
+        <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
+      </template>
+      <template v-slot:item.name="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
+      </template>
+      <template v-slot:item.activeUsers="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-active-users-dialog')">{{ item.activeUsers }}</a>
+      </template>
+      <template v-slot:item.customLocations="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-custom-locations-dialog')">View ({{ item.customLocations }})</a>
+      </template>
+      <template v-slot:item.colorSettings="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-color-settings-dialog')">XXX Setup</a>
+      </template>
+      <template v-slot:item.teamProfile="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-coming-soon-dialog')">View</a>
+      </template>
+      <template v-slot:item.luceoSetup="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-luceo-setup-dialog')">Setup/View</a>
+      </template>
+      <template v-slot:item.customer="{ item }">
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-coming-soon-dialog')">{{ item.customer }}</a>
+      </template>
+    </v-data-table>
 
-      <ComingSoonDialog :data="currentTeamData"></ComingSoonDialog>
-      <LuceoSetupDialog :data="currentTeamData"></LuceoSetupDialog>
-      <ColorSettingsDialog :data="currentTeamData"></ColorSettingsDialog>
-      <CustomLocationsDialog :data="currentTeamData"></CustomLocationsDialog>
-      <ChangeLogoDialog :data="currentTeamData"></ChangeLogoDialog>
-      <ActiveUsersDialog :data="currentTeamData"></ActiveUsersDialog>
-      <AddEditDialog :data="currentTeamData"></AddEditDialog>
+    <ComingSoonDialog :data="currentTeamData"></ComingSoonDialog>
+    <LuceoSetupDialog :data="currentTeamData"></LuceoSetupDialog>
+    <ColorSettingsDialog :data="currentTeamData"></ColorSettingsDialog>
+    <CustomLocationsDialog :data="currentTeamData"></CustomLocationsDialog>
+    <ChangeLogoDialog :data="currentTeamData"></ChangeLogoDialog>
+    <ActiveUsersDialog :data="currentTeamData"></ActiveUsersDialog>
+    <AddEditDialog :data="currentTeamData"></AddEditDialog>
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -90,7 +90,8 @@
       },
 
       methods: {
-        showDialogAndTransferEvent (item, event) {
+        showDialogAndTransferEvent (item, event, routeName) {
+          item.routeName = routeName;
           this.currentTeamData = item;
           this.$eventHub.$emit(event);
         },

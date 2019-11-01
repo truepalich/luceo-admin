@@ -2,18 +2,27 @@
   <v-dialog v-model="dialogStatus" max-width="500px">
     <v-card>
       <v-card-title class="headline dialogHeader">
-        <span class="headline">Status</span>
+        <span class="headline">{{ $route.name == 'Customers' ? 'Status' : 'Account Status'}}</span>
       </v-card-title>
 
       <v-card-text>
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name }} | Status</b>
+              <b v-if="data.name">{{ data.name }} | {{ $route.name == 'Customers' ? 'Status' : 'Account Status'}}</b>
             </v-col>
             <v-col cols="12" sm="12" v-if="data.status">
               <b>Current status: <v-chip :color="data.status=='Active' ? 'green' : 'blue-grey darken-1'" dark>{{ data.status }}</v-chip></b>
             </v-col>
+
+            <v-col cols="12" sm="12" v-if="$route.name == 'Users'">
+              <b>Current Login: test@luceosports.com</b>
+            </v-col>
+            <v-col cols="12" sm="12" v-if="$route.name == 'Users'">
+              <v-btn color="dialogBut4">Reset Password</v-btn>
+              <v-btn color="dialogBut5">Revoke Access</v-btn>
+            </v-col>
+
           </v-row>
         </v-container>
       </v-card-text>

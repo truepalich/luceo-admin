@@ -2,7 +2,7 @@
   <v-dialog v-model="dialogAvatar" max-width="500px">
     <v-card>
       <v-card-title class="headline dialogHeader">
-        <span class="headline">Change logo</span>
+        <span class="headline">{{ $route.name == 'Teams' ? 'Change logo' : 'Change avatar'}}</span>
       </v-card-title>
 
       <v-card-text>
@@ -13,7 +13,7 @@
             </v-col>
             <v-col cols="12" sm="12">
               <v-file-input
-                label="Upload avatar"
+                label="Upload image"
                 prepend-icon="mdi-camera"
               ></v-file-input>
             </v-col>
