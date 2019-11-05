@@ -46,13 +46,13 @@
 
     </v-data-table>
 
-    <ComingSoonDialog :data="currentUserData"></ComingSoonDialog>
-    <ChangeLogoDialog :data="currentUserData"></ChangeLogoDialog>
-    <ActivityDialog :data="currentUserData"></ActivityDialog>
-    <StatusDialog :data="currentUserData"></StatusDialog>
-    <AppPermissionsDialog :data="currentUserData"></AppPermissionsDialog>
-    <TeamsRolesGroupsDialog :data="currentUserData"></TeamsRolesGroupsDialog>
-    <AddEditDialog :data="currentUserData"></AddEditDialog>
+    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
+    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
+    <ActivityDialog :data="currentData"></ActivityDialog>
+    <StatusDialog :data="currentData"></StatusDialog>
+    <AppPermissionsDialog :data="currentData"></AppPermissionsDialog>
+    <TeamsRolesGroupsDialog :data="currentData"></TeamsRolesGroupsDialog>
+    <AddEditDialog :data="currentData"></AddEditDialog>
 
   </div>
 </template>
@@ -65,7 +65,7 @@
   import StatusDialog from "../components/base/StatusDialog";
   import AppPermissionsDialog from "../components/users/AppPermissionsDialog";
   import TeamsRolesGroupsDialog from "../components/users/TeamsRolesGroupsDialog";
-  import AddEditDialog from "../components/users/AddEditDialog";
+  import AddEditDialog from "../components/base/AddEditDialog";
   export default {
     name: "Users",
     components: {
@@ -74,7 +74,25 @@
       AppPermissionsDialog, StatusDialog, ActivityDialog, ChangeLogoDialog, Filters, ComingSoonDialog},
     data: () => ({
       loading: true,
-      currentUserData: {},
+
+      currentData: {
+        itemData: {},
+        dialogData: {
+          entity: 'User',
+          fields: [
+            { type: 'text-field', label: 'Email', value: 'Jason Oner', size: '' },
+            { type: 'text-html', label: 'If a user with this email already exists - prepopulate the form below + allow edit', value: '', size: '8' },
+            { type: 'button', label: 'Check', value: '', size: '4' },
+            { type: 'select', label: 'Customers', value: ['bar', 'fizz', 'buzz'], items: ['foo', 'bar', 'fizz', 'buzz'], size: '' },
+            { type: 'text-field', label: 'First name', value: 'Jason', size: '6' },
+            { type: 'text-field', label: 'Last name', value: 'Oner', size: '6' },
+            { type: 'text-field', label: 'Mob.Phone', value: '', size: '6' },
+            { type: 'text-field', label: 'Alt.Email', value: '', size: '6' },
+            { type: 'text-field', label: 'HubSpot Cont. Id', value: '', size: '6' },
+            { type: 'combobox', label: 'Player Profile', value: '', items: ['Profile 1', 'Profile 2'], size: '6' },
+          ],
+        },
+      },
 
       users: [],
 
@@ -98,7 +116,7 @@
     methods: {
       showDialogAndTransferEvent (item, event, routeName) {
         item.routeName = routeName;
-        this.currentUserData = item;
+        this.currentData.itemData = item;
         this.$eventHub.$emit(event);
       },
 

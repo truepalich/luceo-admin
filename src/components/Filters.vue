@@ -24,7 +24,7 @@
         </v-col>
         <v-col cols="12" md="6" class="align-center justify-end d-flex">
           <div class="pr-2">
-            <v-btn color="filterBut1" @click.prevent="showAddCustomer()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+            <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
@@ -57,7 +57,7 @@
         </v-col>
         <v-col cols="12" md="4" class="align-center justify-end d-flex">
           <div class="pr-2">
-            <v-btn color="filterBut1" @click.prevent="showAddTeam()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+            <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
@@ -117,7 +117,7 @@
           <div class="pr-2">
             <v-btn color="filterBut3" small class="ma-2 white--text ">Template</v-btn>
             <v-btn color="filterBut2" class="ma-2 white--text ml-0" fab><v-icon>mdi-cloud-upload</v-icon></v-btn>
-            <v-btn color="filterBut1" @click.prevent="showAddUser()" class="ma-2 white--text ml-0" fab><v-icon>mdi-plus</v-icon></v-btn>
+            <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text ml-0" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
@@ -144,7 +144,7 @@
         </v-col>
         <v-col cols="12" md="6" class="align-center justify-end d-flex">
           <div class="pr-2">
-            <v-btn color="filterBut1" @click.prevent="showAddGroup()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+            <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
@@ -177,7 +177,7 @@
         </v-col>
         <v-col cols="12" md="4" class="align-center justify-end d-flex">
           <div class="pr-2">
-            <v-btn color="filterBut1" @click.prevent="showAddApp()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
+            <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
@@ -216,20 +216,8 @@
       }
     },
     methods: {
-      showAddCustomer () {
-        this.$eventHub.$emit('show-add-dialog-customer');
-      },
-      showAddTeam () {
-        this.$eventHub.$emit('show-add-dialog-team');
-      },
-      showAddUser () {
-        this.$eventHub.$emit('show-add-dialog-user');
-      },
-      showAddGroup () {
-        this.$eventHub.$emit('show-add-dialog-group');
-      },
-      showAddApp () {
-        this.$eventHub.$emit('show-add-dialog-app');
+      showAddDialog () {
+        this.$eventHub.$emit('show-add-dialog');
       }
     }
   }

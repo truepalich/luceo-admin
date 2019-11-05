@@ -26,9 +26,9 @@
       </template>
     </v-data-table>
 
-    <ChangeLogoDialog :data="currentAppData"></ChangeLogoDialog>
-    <CustomPermissionsDialog :data="currentAppData"></CustomPermissionsDialog>
-    <AddEditDialog :data="currentAppData"></AddEditDialog>
+    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
+    <CustomPermissionsDialog :data="currentData"></CustomPermissionsDialog>
+    <AddEditDialog :data="currentData"></AddEditDialog>
 
   </div>
 </template>
@@ -37,13 +37,27 @@
   import Filters from "../components/Filters";
   import ChangeLogoDialog from "../components/base/ChangeLogoDialog";
   import CustomPermissionsDialog from "../components/apps/CustomPermissionsDialog";
-  import AddEditDialog from "../components/apps/AddEditDialog";
+  import AddEditDialog from "../components/base/AddEditDialog";
   export default {
     name: "Apps",
     components: {AddEditDialog, CustomPermissionsDialog, ChangeLogoDialog, Filters},
     data: () => ({
       loading: true,
-      currentAppData: {},
+
+      currentData: {
+        itemData: {},
+        dialogData: {
+          entity: 'App',
+          fields: [
+            { type: 'text-field', label: 'Name', value: 'Session Tracker', size: '' },
+            { type: 'combobox', label: 'Type', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
+            { type: 'combobox', label: 'Platform', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
+            { type: 'combobox', label: 'Enviroment', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
+            { type: 'text-field', label: 'URL', value: '', size: '' },
+            { type: 'text-field', label: 'Azure App Service Name', value: '', size: '' },
+          ],
+        },
+      },
 
       apps: [],
 
@@ -66,7 +80,7 @@
     methods: {
       showDialogAndTransferEvent (item, event, routeName) {
         item.routeName = routeName;
-        this.currentAppData = item;
+        this.currentData.itemData = item;
         this.$eventHub.$emit(event);
       },
 

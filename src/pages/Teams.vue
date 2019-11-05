@@ -18,9 +18,13 @@
         </v-avatar>
         <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
       </template>
+
+
       <template v-slot:item.name="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
       </template>
+
+
       <template v-slot:item.activeUsers="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-active-users-dialog')">{{ item.activeUsers }}</a>
       </template>
@@ -41,13 +45,14 @@
       </template>
     </v-data-table>
 
-    <ComingSoonDialog :data="currentTeamData"></ComingSoonDialog>
-    <LuceoSetupDialog :data="currentTeamData"></LuceoSetupDialog>
-    <ColorSettingsDialog :data="currentTeamData"></ColorSettingsDialog>
-    <CustomLocationsDialog :data="currentTeamData"></CustomLocationsDialog>
-    <ChangeLogoDialog :data="currentTeamData"></ChangeLogoDialog>
-    <ActiveUsersDialog :data="currentTeamData"></ActiveUsersDialog>
-    <AddEditDialog :data="currentTeamData"></AddEditDialog>
+    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
+    <LuceoSetupDialog :data="currentData"></LuceoSetupDialog>
+    <ColorSettingsDialog :data="currentData"></ColorSettingsDialog>
+    <CustomLocationsDialog :data="currentData"></CustomLocationsDialog>
+    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
+    <ActiveUsersDialog :data="currentData"></ActiveUsersDialog>
+    <AddEditDialog :data="currentData"></AddEditDialog>
+
 
   </div>
 </template>
@@ -60,7 +65,7 @@
     import CustomLocationsDialog from "../components/teams/CustomLocationsDialog";
     import ChangeLogoDialog from "../components/base/ChangeLogoDialog";
     import ActiveUsersDialog from "../components/base/ActiveUsersDialog";
-    import AddEditDialog from "../components/teams/AddEditDialog";
+    import AddEditDialog from "../components/base/AddEditDialog";
     export default {
       name: "Teams",
       components: {
@@ -68,7 +73,18 @@
         ComingSoonDialog, Filters},
       data: () => ({
         loading: true,
-        currentTeamData: {},
+
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Team',
+            fields: [
+              { type: 'combobox', label: 'Customer', value: '', items: ['Programming', 'Design', 'Vue', 'Vuetify',], size: '' },
+              { type: 'text-field', label: 'Name', value: 'Phoenix Suns', items: '', size: '' },
+              { type: 'combobox', label: 'Team Profile', value: '', items: ['Programming', 'Design', 'Vue', 'Vuetify',], size: '' },
+            ],
+          },
+        },
 
         teams: [],
 
@@ -86,13 +102,13 @@
       }),
 
       created () {
-        this.initialize()
+        this.initialize();
       },
 
       methods: {
         showDialogAndTransferEvent (item, event, routeName) {
           item.routeName = routeName;
-          this.currentTeamData = item;
+          this.currentData.itemData = item;
           this.$eventHub.$emit(event);
         },
 

@@ -34,11 +34,11 @@
       </template>
     </v-data-table>
 
-    <AddEditDialog :data="currentCustomerData"></AddEditDialog>
-    <StatusDialog :data="currentCustomerData"></StatusDialog>
-    <ComingSoonDialog :data="currentCustomerData"></ComingSoonDialog>
-    <ActiveUsersDialog :data="currentCustomerData"></ActiveUsersDialog>
-    <AdminUsersDialog :data="currentCustomerData"></AdminUsersDialog>
+    <AddEditDialog :data="currentData"></AddEditDialog>
+    <StatusDialog :data="currentData"></StatusDialog>
+    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
+    <ActiveUsersDialog :data="currentData"></ActiveUsersDialog>
+    <AdminUsersDialog :data="currentData"></AdminUsersDialog>
 
   </div>
 </template>
@@ -49,7 +49,7 @@
     import ActiveUsersDialog from "../components/base/ActiveUsersDialog";
     import StatusDialog from "../components/base/StatusDialog";
     import ComingSoonDialog from "../components/base/ComingSoonDialog";
-    import AddEditDialog from "../components/customers/AddEditDialog";
+    import AddEditDialog from "../components/base/AddEditDialog";
     export default {
       name: "Customers",
       components: {AddEditDialog, ComingSoonDialog, StatusDialog, ActiveUsersDialog, AdminUsersDialog, Filters},
@@ -59,7 +59,17 @@
         customers: [],
         totalCustomers: 0,
 
-        currentCustomerData: {},
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Customer',
+            fields: [
+              // { type: 'text-field', label: 'Name', value: 'Jason Oner', size: '' },
+              // { type: 'text-field', label: 'Hubspot Company Id', value: '', size: '' },
+              // { type: 'date', label: 'Renewal Date', value: new Date().toISOString().substr(0, 10), size: '' },
+            ],
+          },
+        },
 
         headers: [
           { text: 'Name', align: 'left', value: 'name' },
@@ -73,9 +83,8 @@
       }),
 
       created () {
+        this.preInitialize()
         this.initialize()
-
-
       },
 
       // watch: {
@@ -101,8 +110,20 @@
       methods: {
         showDialogAndTransferEvent (item, event, routeName) {
           item.routeName = routeName;
-          this.currentCustomerData = item;
+          this.currentData.itemData = item;
           this.$eventHub.$emit(event);
+        },
+
+        preInitialize () {
+          this.axios.get('http://dev.itirra.com/luceo/admin/getCustomer.php')
+            .then((response) => {
+              // this.$store.commit('setCustomers', response.data)
+              this.currentData.dialogData.fields = response.data
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
         },
 
         initialize () {

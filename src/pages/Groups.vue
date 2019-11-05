@@ -17,8 +17,8 @@
       </template>
     </v-data-table>
 
-    <AddEditMembersDialog :data="currentGroupData"></AddEditMembersDialog>
-    <AddEditDialog :data="currentGroupData"></AddEditDialog>
+    <AddEditMembersDialog :data="currentData"></AddEditMembersDialog>
+    <AddEditDialog :data="currentData"></AddEditDialog>
 
   </div>
 </template>
@@ -26,13 +26,23 @@
 <script>
     import Filters from "../components/Filters";
     import AddEditMembersDialog from "../components/groups/AddEditMembersDialog";
-    import AddEditDialog from "../components/groups/AddEditDialog";
+    import AddEditDialog from "../components/base/AddEditDialog";
     export default {
       name: "Groups",
       components: {AddEditDialog, AddEditMembersDialog, Filters},
       data: () => ({
         loading: true,
-        currentGroupData: {},
+
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Group',
+            fields: [
+              { type: 'combobox', label: 'Customer', value: '', items: ['Customer 1', 'Customer 2', 'Customer 3', 'Customer 4', 'Customer 5'], size: '' },
+              { type: 'text-field', label: 'Name', value: 'Forward 1', size: '' },
+            ],
+          },
+        },
 
         groups: [],
 
@@ -49,7 +59,7 @@
       methods: {
         showDialogAndTransferEvent (item, event, routeName) {
           item.routeName = routeName;
-          this.currentGroupData = item;
+          this.currentData.itemData = item;
           this.$eventHub.$emit(event);
         },
 
