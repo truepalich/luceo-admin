@@ -63,11 +63,7 @@
           itemData: {},
           dialogData: {
             entity: 'Customer',
-            fields: [
-              // { type: 'text-field', label: 'Name', value: 'Jason Oner', size: '' },
-              // { type: 'text-field', label: 'Hubspot Company Id', value: '', size: '' },
-              // { type: 'date', label: 'Renewal Date', value: new Date().toISOString().substr(0, 10), size: '' },
-            ],
+            fields: [],
           },
         },
 
@@ -117,7 +113,6 @@
         preInitialize () {
           this.axios.get('http://dev.itirra.com/luceo/admin/getCustomer.php')
             .then((response) => {
-              // this.$store.commit('setCustomers', response.data)
               this.currentData.dialogData.fields = response.data
             })
             .catch(function (error) {

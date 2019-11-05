@@ -48,14 +48,7 @@
         itemData: {},
         dialogData: {
           entity: 'App',
-          fields: [
-            { type: 'text-field', label: 'Name', value: 'Session Tracker', size: '' },
-            { type: 'combobox', label: 'Type', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
-            { type: 'combobox', label: 'Platform', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
-            { type: 'combobox', label: 'Enviroment', value: '', items: ['Combobox 1', 'Combobox 2', 'Combobox 3', 'Combobox 4', 'Combobox 5'], size: '' },
-            { type: 'text-field', label: 'URL', value: '', size: '' },
-            { type: 'text-field', label: 'Azure App Service Name', value: '', size: '' },
-          ],
+          fields: [],
         },
       },
 
@@ -74,6 +67,7 @@
     }),
 
     created () {
+      this.preInitialize()
       this.initialize()
     },
 
@@ -82,6 +76,17 @@
         item.routeName = routeName;
         this.currentData.itemData = item;
         this.$eventHub.$emit(event);
+      },
+
+      preInitialize () {
+        this.axios.get('http://dev.itirra.com/luceo/admin/getApp.php')
+          .then((response) => {
+            this.currentData.dialogData.fields = response.data
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
       },
 
       initialize() {

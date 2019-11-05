@@ -79,18 +79,7 @@
         itemData: {},
         dialogData: {
           entity: 'User',
-          fields: [
-            { type: 'text-field', label: 'Email', value: 'Jason Oner', size: '' },
-            { type: 'text-html', label: 'If a user with this email already exists - prepopulate the form below + allow edit', value: '', size: '8' },
-            { type: 'button', label: 'Check', value: '', size: '4' },
-            { type: 'select', label: 'Customers', value: ['bar', 'fizz', 'buzz'], items: ['foo', 'bar', 'fizz', 'buzz'], size: '' },
-            { type: 'text-field', label: 'First name', value: 'Jason', size: '6' },
-            { type: 'text-field', label: 'Last name', value: 'Oner', size: '6' },
-            { type: 'text-field', label: 'Mob.Phone', value: '', size: '6' },
-            { type: 'text-field', label: 'Alt.Email', value: '', size: '6' },
-            { type: 'text-field', label: 'HubSpot Cont. Id', value: '', size: '6' },
-            { type: 'combobox', label: 'Player Profile', value: '', items: ['Profile 1', 'Profile 2'], size: '6' },
-          ],
+          fields: [],
         },
       },
 
@@ -110,6 +99,7 @@
     }),
 
     created () {
+      this.preInitialize()
       this.initialize()
     },
 
@@ -118,6 +108,17 @@
         item.routeName = routeName;
         this.currentData.itemData = item;
         this.$eventHub.$emit(event);
+      },
+
+      preInitialize () {
+        this.axios.get('http://dev.itirra.com/luceo/admin/getUser.php')
+          .then((response) => {
+            this.currentData.dialogData.fields = response.data
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
       },
 
       initialize () {

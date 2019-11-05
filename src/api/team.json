@@ -1,0 +1,23 @@
+[
+  {
+    "type": "combobox",
+    "label": "Customer",
+    "value": "",
+    "items": ["Programming", "Design", "Vue", "Vuetify"],
+    "size": ""
+  },
+  {
+    "type": "text-field",
+    "label": "Name",
+    "value": "Phoenix Suns",
+    "items": "",
+    "size": ""
+  },
+  {
+    "type": "combobox",
+    "label": "Team Profile",
+    "value": "",
+    "items": ["Programming", "Design", "Vue", "Vuetify"],
+    "size": ""
+  }
+]

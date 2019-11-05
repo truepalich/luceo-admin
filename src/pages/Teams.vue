@@ -78,11 +78,7 @@
           itemData: {},
           dialogData: {
             entity: 'Team',
-            fields: [
-              { type: 'combobox', label: 'Customer', value: '', items: ['Programming', 'Design', 'Vue', 'Vuetify',], size: '' },
-              { type: 'text-field', label: 'Name', value: 'Phoenix Suns', items: '', size: '' },
-              { type: 'combobox', label: 'Team Profile', value: '', items: ['Programming', 'Design', 'Vue', 'Vuetify',], size: '' },
-            ],
+            fields: [],
           },
         },
 
@@ -102,6 +98,7 @@
       }),
 
       created () {
+        this.preInitialize();
         this.initialize();
       },
 
@@ -110,6 +107,17 @@
           item.routeName = routeName;
           this.currentData.itemData = item;
           this.$eventHub.$emit(event);
+        },
+
+        preInitialize () {
+          this.axios.get('http://dev.itirra.com/luceo/admin/getTeam.php')
+            .then((response) => {
+              this.currentData.dialogData.fields = response.data
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
         },
 
         initialize () {

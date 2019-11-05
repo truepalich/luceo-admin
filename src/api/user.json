@@ -1,0 +1,72 @@
+[
+  {
+    "type": "text-field",
+    "label": "Email",
+    "value": "",
+    "items": "",
+    "size": ""
+  },
+  {
+    "type": "text-html",
+    "label": "If a user with this email already exists - prepopulate the form below + allow edit",
+    "value": "",
+    "items": "",
+    "size": "8"
+  },
+  {
+    "type": "button",
+    "label": "Check",
+    "value": "",
+    "items": "",
+    "size": "4"
+  },
+  {
+    "type": "select",
+    "label": "Customers",
+    "value": ["bar", "fizz", "buzz"],
+    "items": ["foo", "bar", "fizz", "buzz"],
+    "size": ""
+  },
+  {
+    "type": "text-field",
+    "label": "First name",
+    "value": "Jason",
+    "items": "",
+    "size": "6"
+  },
+  {
+    "type": "text-field",
+    "label": "Last name",
+    "value": "Oner",
+    "items": "",
+    "size": "6"
+  },
+  {
+    "type": "text-field",
+    "label": "Mob.Phone",
+    "value": "",
+    "items": "",
+    "size": "6"
+  },
+  {
+    "type": "text-field",
+    "label": "Alt.Email",
+    "value": "",
+    "items": "",
+    "size": "6"
+  },
+  {
+    "type": "text-field",
+    "label": "HubSpot Cont. Id",
+    "value": "",
+    "items": "",
+    "size": "6"
+  },
+  {
+    "type": "combobox",
+    "label": "Player Profile",
+    "value": "",
+    "items": ["Profile 1", "Profile 2"],
+    "size": "6"
+  }
+]

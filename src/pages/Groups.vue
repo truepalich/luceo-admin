@@ -37,10 +37,7 @@
           itemData: {},
           dialogData: {
             entity: 'Group',
-            fields: [
-              { type: 'combobox', label: 'Customer', value: '', items: ['Customer 1', 'Customer 2', 'Customer 3', 'Customer 4', 'Customer 5'], size: '' },
-              { type: 'text-field', label: 'Name', value: 'Forward 1', size: '' },
-            ],
+            fields: [],
           },
         },
 
@@ -54,6 +51,7 @@
 
       }),
       created () {
+        this.preInitialize()
         this.initialize()
       },
       methods: {
@@ -61,6 +59,17 @@
           item.routeName = routeName;
           this.currentData.itemData = item;
           this.$eventHub.$emit(event);
+        },
+
+        preInitialize () {
+          this.axios.get('http://dev.itirra.com/luceo/admin/getGroup.php')
+            .then((response) => {
+              this.currentData.dialogData.fields = response.data
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
         },
 
         initialize() {

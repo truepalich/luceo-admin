@@ -1,0 +1,44 @@
+[
+  {
+    "type": "text-field",
+    "label": "Name",
+    "value": "Session Tracker",
+    "items": "",
+    "size": ""
+  },
+  {
+    "type": "combobox",
+    "label": "Type",
+    "value": "",
+    "items": ["Combobox 1", "Combobox 2", "Combobox 3", "Combobox 4"],
+    "size": ""
+  },
+  {
+    "type": "combobox",
+    "label": "Platform",
+    "value": "",
+    "items": ["Combobox 1", "Combobox 2", "Combobox 3", "Combobox 4"],
+    "size": ""
+  },
+  {
+    "type": "combobox",
+    "label": "Enviroment",
+    "value": "",
+    "items": ["Combobox 1", "Combobox 2", "Combobox 3", "Combobox 4"],
+    "size": ""
+  },
+  {
+    "type": "text-field",
+    "label": "URL",
+    "value": "",
+    "items": "",
+    "size": ""
+  },
+  {
+    "type": "text-field",
+    "label": "Azure App Service Name",
+    "value": "",
+    "items": "",
+    "size": ""
+  }
+]
