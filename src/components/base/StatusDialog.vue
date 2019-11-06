@@ -9,10 +9,10 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name }} | {{ $route.name == 'Customers' ? 'Status' : 'Account Status'}}</b>
+              <b v-if="data.itemData.name">{{ data.itemData.name }} | {{ $route.name == 'Customers' ? 'Status' : 'Account Status'}}</b>
             </v-col>
-            <v-col cols="12" sm="12" v-if="data.status">
-              <b>Current status: <v-chip :color="data.status=='Active' ? 'green' : 'blue-grey darken-1'" dark>{{ data.status }}</v-chip></b>
+            <v-col cols="12" sm="12" v-if="data.itemData.status">
+              <b>Current status: <v-chip :color="data.itemData.status=='Active' ? 'green' : 'blue-grey darken-1'" dark>{{ data.itemData.status }}</v-chip></b>
             </v-col>
 
             <v-col cols="12" sm="12" v-if="$route.name == 'Users'">

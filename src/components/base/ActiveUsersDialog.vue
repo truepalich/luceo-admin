@@ -9,7 +9,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name }} | Active Users</b>
+              <b v-if="data.itemData.name">{{ data.itemData.name }} | Active Users</b>
             </v-col>
             <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 1 / Player"></v-checkbox></v-col>
             <v-col cols="12" sm="12" class="py-0"><v-checkbox color="selectedColors" label="Player 2 / Player"></v-checkbox></v-col>

@@ -2,7 +2,7 @@
   <v-dialog v-model="dialogCustomPermissions" max-width="600px">
     <v-card>
       <v-card-title class="headline dialogHeader">
-        <span class="headline">Custom Permissions: {{ data.name }}</span>
+        <span class="headline">Custom Permissions: {{ data.itemData.name }}</span>
       </v-card-title>
 
       <v-card-text>

@@ -2,7 +2,7 @@
   <v-dialog v-model="dialogComingSoon" max-width="500px">
     <v-card>
       <v-card-title class="headline dialogHeader">
-        <span class="headline" v-if="data.name">{{ data.name }}</span>
+        <span class="headline" v-if="data.itemData.name">{{ data.itemData.name }}</span>
       </v-card-title>
 
       <v-card-text>

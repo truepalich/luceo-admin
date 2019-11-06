@@ -2,14 +2,14 @@
   <v-dialog v-model="dialogCustomLocations" max-width="500px">
     <v-card>
       <v-card-title class="headline dialogHeader">
-        <span class="headline" v-if="data.name">Locations: {{ data.name }}</span>
+        <span class="headline" v-if="data.itemData.name">Locations: {{ data.name }}</span>
       </v-card-title>
 
       <v-card-text>
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name }} | Locations</b>
+              <b v-if="data.itemData.name">{{ data.itemData.name }} | Locations</b>
             </v-col>
 
             <v-col cols="12" sm="12">

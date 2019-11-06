@@ -9,7 +9,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name}} | 2 Week Activity</b>
+              <b v-if="data.itemData.name">{{ data.itemData.name}} | 2 Week Activity</b>
             </v-col>
             <v-col cols="12" sm="6">
               <v-select

@@ -1,23 +1,6 @@
-[
-  {
-    "type": "text-field",
-    "label": "Name",
-    "value": "Jason Oner",
-    "items": "",
-    "size": ""
-  },
-  {
-    "type": "text-field",
-    "label": "Hubspot Company Id",
-    "value": "",
-    "items": "",
-    "size": ""
-  },
-  {
-    "type": "date",
-    "label": "Renewal Date",
-    "value": "2019-11-05",
-    "items": "",
-    "size": ""
-  }
-]
+{
+  "CustomerID": 1,
+  "Name": "Jason Oner",
+  "HubSpotCompanyID": "",
+  "RenewalDate": "2019-11-05"
+}

@@ -8,7 +8,7 @@
       <v-card-text>
         <v-container>
           <v-col cols="12" sm="12">
-            <b v-if="data.name">{{ data.name }} | Member</b>
+            <b v-if="data.itemData.name">{{ data.itemData.name }} | Member</b>
           </v-col>
           <v-row>
             <v-col cols="12" sm="4" class="py-0"><v-checkbox color="selectedColors"  label="Player 1 / Player"></v-checkbox></v-col>

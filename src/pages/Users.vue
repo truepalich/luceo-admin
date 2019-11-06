@@ -21,7 +21,7 @@
         <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
       </template>
       <template v-slot:item.name="{ item }">
-        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog', $route.name, 'add-edit')">{{ item.name }}</a>
       </template>
       <template v-slot:item.teamsRolesGroups="{ item }">
         <div v-for="trg in item.teamsRolesGroups">
@@ -79,7 +79,17 @@
         itemData: {},
         dialogData: {
           entity: 'User',
-          fields: [],
+          fields: [
+            { key: "Email", type: "text-field", label: "Email", value: "", items: "", size: "" },
+            { key: "", type: "text-field", label: "If a user with this email already exists - prepopulate the form below + allow edit", value: "", items: "", size: "8" },
+            { key: "", type: "button", label: "Check", value: "", items: "", size: "4" },
+            { key: "CustomerID", type: "select", label: "Customers", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
+            { key: "User_Name", type: "text-field", label: "User name", value: "", items: "", size: "12" },
+            { key: "MobilePhone", type: "text-field", label: "Mob.Phone", value: "", items: "", size: "6" },
+            { key: "AltEmail", type: "text-field", label: "Alt.Email", value: "", items: "", size: "6" },
+            { key: "HubSpotId", type: "text-field", label: "HubSpot Cont. Id", value: "", items: "", size: "6" },
+            { key: "PlayerProfile", type: "combobox", label: "Player Profile", value: "", items: ['Profile 1', 'Profile 2'], size: "6" },
+          ],
         },
       },
 
@@ -99,21 +109,31 @@
     }),
 
     created () {
-      this.preInitialize()
       this.initialize()
     },
 
     methods: {
-      showDialogAndTransferEvent (item, event, routeName) {
+      showDialogAndTransferEvent (item, event, routeName, action) {
+        if (action == 'add-edit') {
+          this.getAddEditData()
+        }
         item.routeName = routeName;
         this.currentData.itemData = item;
         this.$eventHub.$emit(event);
       },
 
-      preInitialize () {
+      getAddEditData () {
         this.axios.get('http://dev.itirra.com/luceo/admin/getUser.php')
           .then((response) => {
-            this.currentData.dialogData.fields = response.data
+
+            this.currentData.dialogData.fields.forEach(function(field) {
+              for (let [key, value] of Object.entries(response.data)) {
+                if (field.key == key) {
+                  field.value = value
+                }
+              }
+            });
+
           })
           .catch(function (error) {
             // handle error

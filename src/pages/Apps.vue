@@ -19,7 +19,7 @@
         <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
       </template>
       <template v-slot:item.name="{ item }">
-        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog', $route.name, 'add-edit')">{{ item.name }}</a>
       </template>
       <template v-slot:item.customPermissions="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-custom-permissions-dialog')">View/Edit</a>
@@ -48,7 +48,14 @@
         itemData: {},
         dialogData: {
           entity: 'App',
-          fields: [],
+          fields: [
+            { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
+            { key: "Type", type: "combobox", label: "Type", value: "", items: ['Type 1', 'Type 2'], size: "" },
+            { key: "Platform", type: "combobox", label: "Platform", value: "", items: ['Platform 1', 'Platform 2'], size: "" },
+            { key: "Enviroment", type: "combobox", label: "Enviroment", value: "", items: ['Enviroment 1', 'Enviroment 2'], size: "" },
+            { key: "Url", type: "text-field", label: "URL", value: "", items: "", size: "" },
+            { key: "AzureAppServiceName", type: "text-field", label: "Azure App Service Name", value: "", items: "", size: "" },
+          ],
         },
       },
 
@@ -67,21 +74,31 @@
     }),
 
     created () {
-      this.preInitialize()
       this.initialize()
     },
 
     methods: {
-      showDialogAndTransferEvent (item, event, routeName) {
+      showDialogAndTransferEvent (item, event, routeName, action) {
+        if (action == 'add-edit') {
+          this.getAddEditData()
+        }
         item.routeName = routeName;
         this.currentData.itemData = item;
         this.$eventHub.$emit(event);
       },
 
-      preInitialize () {
+      getAddEditData () {
         this.axios.get('http://dev.itirra.com/luceo/admin/getApp.php')
           .then((response) => {
-            this.currentData.dialogData.fields = response.data
+
+            this.currentData.dialogData.fields.forEach(function(field) {
+              for (let [key, value] of Object.entries(response.data)) {
+                if (field.key == key) {
+                  field.value = value
+                }
+              }
+            });
+
           })
           .catch(function (error) {
             // handle error

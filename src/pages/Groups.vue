@@ -10,7 +10,7 @@
       class="elevation-1"
     >
       <template v-slot:item.customer="{ item }">
-        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.customer }}</a>
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog', $route.name, 'add-edit')">{{ item.customer }}</a>
       </template>
       <template v-slot:item.members="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-member-dialog')">{{ item.members }} - edit</a>
@@ -37,7 +37,10 @@
           itemData: {},
           dialogData: {
             entity: 'Group',
-            fields: [],
+            fields: [
+              { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
+              { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" }
+            ],
           },
         },
 
@@ -51,20 +54,30 @@
 
       }),
       created () {
-        this.preInitialize()
         this.initialize()
       },
       methods: {
-        showDialogAndTransferEvent (item, event, routeName) {
+        showDialogAndTransferEvent (item, event, routeName, action) {
+          if (action == 'add-edit') {
+            this.getAddEditData()
+          }
           item.routeName = routeName;
           this.currentData.itemData = item;
           this.$eventHub.$emit(event);
         },
 
-        preInitialize () {
+        getAddEditData () {
           this.axios.get('http://dev.itirra.com/luceo/admin/getGroup.php')
             .then((response) => {
-              this.currentData.dialogData.fields = response.data
+
+              this.currentData.dialogData.fields.forEach(function(field) {
+                for (let [key, value] of Object.entries(response.data)) {
+                  if (field.key == key) {
+                    field.value = value
+                  }
+                }
+              });
+
             })
             .catch(function (error) {
               // handle error

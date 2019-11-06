@@ -9,7 +9,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
-              <b v-if="data.name">{{ data.name }} | Color settings</b>
+              <b v-if="data.itemData.name">{{ data.itemData.name }} | Color settings</b>
             </v-col>
             <v-col cols="12" sm="6">
               <b>Primary:</b>

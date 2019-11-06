@@ -18,13 +18,9 @@
         </v-avatar>
         <v-icon color="links" small @click.prevent="showDialogAndTransferEvent(item, 'show-change-logo-dialog')">mdi-pencil</v-icon>
       </template>
-
-
       <template v-slot:item.name="{ item }">
-        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog')">{{ item.name }}</a>
+        <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-add-edit-dialog', $route.name, 'add-edit')">{{ item.name }}</a>
       </template>
-
-
       <template v-slot:item.activeUsers="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-active-users-dialog')">{{ item.activeUsers }}</a>
       </template>
@@ -78,7 +74,11 @@
           itemData: {},
           dialogData: {
             entity: 'Team',
-            fields: [],
+            fields: [
+              { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
+              { key: "TeamName", type: "text-field", label: "Name", value: "", items: "", size: "" },
+              { key: "TeamProfile", type: "combobox", label: "Team Profile", value: "", items: ['Team Profile 1', 'Team Profile 2'], size: "" }
+            ],
           },
         },
 
@@ -98,21 +98,31 @@
       }),
 
       created () {
-        this.preInitialize();
         this.initialize();
       },
 
       methods: {
-        showDialogAndTransferEvent (item, event, routeName) {
+        showDialogAndTransferEvent (item, event, routeName, action) {
+          if (action == 'add-edit') {
+            this.getAddEditData()
+          }
           item.routeName = routeName;
           this.currentData.itemData = item;
           this.$eventHub.$emit(event);
         },
 
-        preInitialize () {
+        getAddEditData () {
           this.axios.get('http://dev.itirra.com/luceo/admin/getTeam.php')
             .then((response) => {
-              this.currentData.dialogData.fields = response.data
+
+              this.currentData.dialogData.fields.forEach(function(field) {
+                for (let [key, value] of Object.entries(response.data)) {
+                  if (field.key == key) {
+                    field.value = value
+                  }
+                }
+              });
+
             })
             .catch(function (error) {
               // handle error
