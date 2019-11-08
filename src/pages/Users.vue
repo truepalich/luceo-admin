@@ -66,32 +66,17 @@
   import AppPermissionsDialog from "../components/users/AppPermissionsDialog";
   import TeamsRolesGroupsDialog from "../components/users/TeamsRolesGroupsDialog";
   import AddEditDialog from "../components/base/AddEditDialog";
+  import {Mixin} from "../mixins/Mixin";
+
   export default {
     name: "Users",
+    mixins: [Mixin],
     components: {
       AddEditDialog,
       TeamsRolesGroupsDialog,
       AppPermissionsDialog, StatusDialog, ActivityDialog, ChangeLogoDialog, Filters, ComingSoonDialog},
     data: () => ({
       loading: true,
-
-      currentData: {
-        itemData: {},
-        dialogData: {
-          entity: 'User',
-          fields: [
-            { key: "Email", type: "text-field", label: "Email", value: "", items: "", size: "" },
-            { key: "", type: "text-field", label: "If a user with this email already exists - prepopulate the form below + allow edit", value: "", items: "", size: "8" },
-            { key: "", type: "button", label: "Check", value: "", items: "", size: "4" },
-            { key: "CustomerID", type: "select", label: "Customers", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
-            { key: "User_Name", type: "text-field", label: "User name", value: "", items: "", size: "12" },
-            { key: "MobilePhone", type: "text-field", label: "Mob.Phone", value: "", items: "", size: "6" },
-            { key: "AltEmail", type: "text-field", label: "Alt.Email", value: "", items: "", size: "6" },
-            { key: "HubSpotId", type: "text-field", label: "HubSpot Cont. Id", value: "", items: "", size: "6" },
-            { key: "PlayerProfile", type: "combobox", label: "Player Profile", value: "", items: ['Profile 1', 'Profile 2'], size: "6" },
-          ],
-        },
-      },
 
       users: [],
 
@@ -105,42 +90,36 @@
         { text: 'Player Profile', value: 'playerProfile', },
         { text: 'Customers', value: 'customers', },
       ],
-
     }),
 
+    computed: {
+      currentData () {
+        let data = {
+          itemData: {},
+          dialogData: {
+            entity: 'User',
+            fields: [
+              { key: "Email", type: "text-field", label: "Email", value: "", items: "", size: "" },
+              { type: "text-html", label: "If a user with this email already exists - prepopulate the form below + allow edit", size: "8" },
+              { type: "button", label: "Check", size: "4" },
+              { key: "CustomerID", type: "select", label: "Customers", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
+              { key: "User_Name", type: "text-field", label: "User name", value: "", items: "", size: "12" },
+              { key: "MobilePhone", type: "text-field", label: "Mob.Phone", value: "", items: "", size: "6" },
+              { key: "AltEmail", type: "text-field", label: "Alt.Email", value: "", items: "", size: "6" },
+              { key: "HubSpotId", type: "text-field", label: "HubSpot Cont. Id", value: "", items: "", size: "6" },
+              { key: "PlayerProfile", type: "combobox", label: "Player Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('playerProfiles'), size: "6" },
+            ],
+          },
+        }
+        return data
+      }
+    },
+
     created () {
-      this.initialize()
+
     },
 
     methods: {
-      showDialogAndTransferEvent (item, event, routeName, action) {
-        if (action == 'add-edit') {
-          this.getAddEditData()
-        }
-        item.routeName = routeName;
-        this.currentData.itemData = item;
-        this.$eventHub.$emit(event);
-      },
-
-      getAddEditData () {
-        this.axios.get('http://dev.itirra.com/luceo/admin/getUser.php')
-          .then((response) => {
-
-            this.currentData.dialogData.fields.forEach(function(field) {
-              for (let [key, value] of Object.entries(response.data)) {
-                if (field.key == key) {
-                  field.value = value
-                }
-              }
-            });
-
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
-      },
-
       initialize () {
         setTimeout( ()=> {
           this.users = [

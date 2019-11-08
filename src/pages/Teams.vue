@@ -49,7 +49,6 @@
     <ActiveUsersDialog :data="currentData"></ActiveUsersDialog>
     <AddEditDialog :data="currentData"></AddEditDialog>
 
-
   </div>
 </template>
 
@@ -62,25 +61,16 @@
     import ChangeLogoDialog from "../components/base/ChangeLogoDialog";
     import ActiveUsersDialog from "../components/base/ActiveUsersDialog";
     import AddEditDialog from "../components/base/AddEditDialog";
+    import {Mixin} from "../mixins/Mixin";
+
     export default {
       name: "Teams",
+      mixins: [Mixin],
       components: {
         AddEditDialog, ActiveUsersDialog, ChangeLogoDialog, CustomLocationsDialog, ColorSettingsDialog, LuceoSetupDialog,
         ComingSoonDialog, Filters},
       data: () => ({
         loading: true,
-
-        currentData: {
-          itemData: {},
-          dialogData: {
-            entity: 'Team',
-            fields: [
-              { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
-              { key: "TeamName", type: "text-field", label: "Name", value: "", items: "", size: "" },
-              { key: "TeamProfile", type: "combobox", label: "Team Profile", value: "", items: ['Team Profile 1', 'Team Profile 2'], size: "" }
-            ],
-          },
-        },
 
         teams: [],
 
@@ -97,38 +87,28 @@
         ],
       }),
 
+      computed: {
+        currentData () {
+          let data = {
+            itemData: {},
+            dialogData: {
+              entity: 'Team',
+              fields: [
+                { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
+                { key: "TeamName", type: "text-field", label: "Name", value: "", items: "", size: "" },
+                { key: "TeamProfile", type: "combobox", label: "Team Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('teamProfiles'), size: "" }
+              ],
+            },
+          }
+          return data
+        }
+      },
+
       created () {
-        this.initialize();
+
       },
 
       methods: {
-        showDialogAndTransferEvent (item, event, routeName, action) {
-          if (action == 'add-edit') {
-            this.getAddEditData()
-          }
-          item.routeName = routeName;
-          this.currentData.itemData = item;
-          this.$eventHub.$emit(event);
-        },
-
-        getAddEditData () {
-          this.axios.get('http://dev.itirra.com/luceo/admin/getTeam.php')
-            .then((response) => {
-
-              this.currentData.dialogData.fields.forEach(function(field) {
-                for (let [key, value] of Object.entries(response.data)) {
-                  if (field.key == key) {
-                    field.value = value
-                  }
-                }
-              });
-
-            })
-            .catch(function (error) {
-              // handle error
-              console.log(error);
-            })
-        },
 
         initialize () {
           setTimeout( ()=> {

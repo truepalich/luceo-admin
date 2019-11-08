@@ -27,22 +27,14 @@
     import Filters from "../components/Filters";
     import AddEditMembersDialog from "../components/groups/AddEditMembersDialog";
     import AddEditDialog from "../components/base/AddEditDialog";
+    import {Mixin} from "../mixins/Mixin";
+
     export default {
       name: "Groups",
+      mixins: [Mixin],
       components: {AddEditDialog, AddEditMembersDialog, Filters},
       data: () => ({
         loading: true,
-
-        currentData: {
-          itemData: {},
-          dialogData: {
-            entity: 'Group',
-            fields: [
-              { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: ['Customer 1', 'Customer 2'], size: "" },
-              { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" }
-            ],
-          },
-        },
 
         groups: [],
 
@@ -53,38 +45,27 @@
         ],
 
       }),
+
       created () {
-        this.initialize()
       },
-      methods: {
-        showDialogAndTransferEvent (item, event, routeName, action) {
-          if (action == 'add-edit') {
-            this.getAddEditData()
+
+      computed: {
+        currentData () {
+          let data = {
+            itemData: {},
+            dialogData: {
+              entity: 'Group',
+              fields: [
+                { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
+                { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" }
+              ],
+            },
           }
-          item.routeName = routeName;
-          this.currentData.itemData = item;
-          this.$eventHub.$emit(event);
-        },
+          return data
+        }
+      },
 
-        getAddEditData () {
-          this.axios.get('http://dev.itirra.com/luceo/admin/getGroup.php')
-            .then((response) => {
-
-              this.currentData.dialogData.fields.forEach(function(field) {
-                for (let [key, value] of Object.entries(response.data)) {
-                  if (field.key == key) {
-                    field.value = value
-                  }
-                }
-              });
-
-            })
-            .catch(function (error) {
-              // handle error
-              console.log(error);
-            })
-        },
-
+      methods: {
         initialize() {
           setTimeout( ()=> {
             this.groups = [

@@ -50,26 +50,17 @@
     import StatusDialog from "../components/base/StatusDialog";
     import ComingSoonDialog from "../components/base/ComingSoonDialog";
     import AddEditDialog from "../components/base/AddEditDialog";
+    import {Mixin} from "../mixins/Mixin";
+
     export default {
       name: "Customers",
+      mixins: [Mixin],
       components: {AddEditDialog, ComingSoonDialog, StatusDialog, ActiveUsersDialog, AdminUsersDialog, Filters},
       data: () => ({
         loading: true,
         options: {},
         customers: [],
         totalCustomers: 0,
-
-        currentData: {
-          itemData: {},
-          dialogData: {
-            entity: 'Customer',
-            fields: [
-              { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
-              { key: "HubSpotCompanyID", type: "text-field", label: "Hubspot Company Id", value: "", items: "", size: "" },
-              { key: "RenewalDate", type: "date", label: "Renewal Date", value: "", items: "", size: "" }
-            ],
-          },
-        },
 
         headers: [
           { text: 'Name', align: 'left', value: 'name' },
@@ -82,8 +73,25 @@
         ],
       }),
 
+      computed: {
+        currentData () {
+          let data = {
+            itemData: {},
+            dialogData: {
+              entity: 'Customer',
+              fields: [
+                { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
+                { key: "HubSpotCompanyID", type: "text-field", label: "Hubspot Company Id", value: "", items: "", size: "" },
+                { key: "RenewalDate", type: "date", label: "Renewal Date", value: "", items: "", size: "" }
+              ],
+            },
+          }
+          return data
+        }
+      },
+
       created () {
-        this.initialize()
+
       },
 
       // watch: {
@@ -107,33 +115,6 @@
       // },
 
       methods: {
-        showDialogAndTransferEvent (item, event, routeName, action) {
-          if (action == 'add-edit') {
-            this.getAddEditData()
-          }
-          item.routeName = routeName;
-          this.currentData.itemData = item;
-          this.$eventHub.$emit(event);
-        },
-
-        getAddEditData () {
-          this.axios.get('http://dev.itirra.com/luceo/admin/getCustomer.php')
-            .then((response) => {
-
-              this.currentData.dialogData.fields.forEach(function(field) {
-                for (let [key, value] of Object.entries(response.data)) {
-                  if (field.key == key) {
-                    field.value = value
-                  }
-                }
-              });
-
-            })
-            .catch(function (error) {
-              // handle error
-              console.log(error);
-            })
-        },
 
         initialize () {
           setTimeout( ()=> {

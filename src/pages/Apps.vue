@@ -38,26 +38,14 @@
   import ChangeLogoDialog from "../components/base/ChangeLogoDialog";
   import CustomPermissionsDialog from "../components/apps/CustomPermissionsDialog";
   import AddEditDialog from "../components/base/AddEditDialog";
+  import {Mixin} from "../mixins/Mixin";
+
   export default {
     name: "Apps",
+    mixins: [Mixin],
     components: {AddEditDialog, CustomPermissionsDialog, ChangeLogoDialog, Filters},
     data: () => ({
       loading: true,
-
-      currentData: {
-        itemData: {},
-        dialogData: {
-          entity: 'App',
-          fields: [
-            { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
-            { key: "Type", type: "combobox", label: "Type", value: "", items: ['Type 1', 'Type 2'], size: "" },
-            { key: "Platform", type: "combobox", label: "Platform", value: "", items: ['Platform 1', 'Platform 2'], size: "" },
-            { key: "Enviroment", type: "combobox", label: "Enviroment", value: "", items: ['Enviroment 1', 'Enviroment 2'], size: "" },
-            { key: "Url", type: "text-field", label: "URL", value: "", items: "", size: "" },
-            { key: "AzureAppServiceName", type: "text-field", label: "Azure App Service Name", value: "", items: "", size: "" },
-          ],
-        },
-      },
 
       apps: [],
 
@@ -74,37 +62,30 @@
     }),
 
     created () {
-      this.initialize()
+
+    },
+
+    computed: {
+      currentData () {
+        let data = {
+          itemData: {},
+          dialogData: {
+            entity: 'App',
+            fields: [
+              { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
+              { key: "Type", type: "combobox", label: "Type", value: "", items: this.$store.getters.getCurrentRelationByKey('appType'), size: "" },
+              { key: "Platform", type: "combobox", label: "Platform", value: "", items: this.$store.getters.getCurrentRelationByKey('appPlatform'), size: "" },
+              { key: "Enviroment", type: "combobox", label: "Enviroment", value: "", items: this.$store.getters.getCurrentRelationByKey('appEnviroment'), size: "" },
+              { key: "Url", type: "text-field", label: "URL", value: "", items: "", size: "" },
+              { key: "AzureAppServiceName", type: "text-field", label: "Azure App Service Name", value: "", items: "", size: "" },
+            ],
+          },
+        }
+        return data
+      }
     },
 
     methods: {
-      showDialogAndTransferEvent (item, event, routeName, action) {
-        if (action == 'add-edit') {
-          this.getAddEditData()
-        }
-        item.routeName = routeName;
-        this.currentData.itemData = item;
-        this.$eventHub.$emit(event);
-      },
-
-      getAddEditData () {
-        this.axios.get('http://dev.itirra.com/luceo/admin/getApp.php')
-          .then((response) => {
-
-            this.currentData.dialogData.fields.forEach(function(field) {
-              for (let [key, value] of Object.entries(response.data)) {
-                if (field.key == key) {
-                  field.value = value
-                }
-              }
-            });
-
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
-      },
 
       initialize() {
         setTimeout( ()=> {

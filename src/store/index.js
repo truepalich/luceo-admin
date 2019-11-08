@@ -5,16 +5,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    customers: [],
+    currentPageRelations: [],
   },
   mutations: {
-    setCustomers (state, payload) {
-      state.customers = payload
+    setCurrentPageRelations (state, payload) {
+      state.currentPageRelations = payload
     },
   },
   getters: {
-    getCustomers: (state, getters) => {
-      return state.customers;
+    getCurrentPageRelations: (state, getters) => {
+      return state.currentPageRelations;
+    },
+    getCurrentRelationByKey: (state, getters) => (key) => {
+      if (key) {
+        var relationResult = []
+        if (state.currentPageRelations[key]) {
+          state.currentPageRelations[key].forEach(function(item) {
+            relationResult.push(item.name)
+          })
+        }
+        return relationResult
+      }
+
     }
   }
 })

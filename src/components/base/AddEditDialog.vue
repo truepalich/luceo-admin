@@ -59,6 +59,11 @@
   export default {
     name: "AddEditDialog",
     props: ['data'],
+    // watch: {
+    //   data: function(newVal, oldVal) { // watch it
+    //     // console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    //   }
+    // },
     data: () => ({
       dialogAddEdit: false,
       addDialogView: false,

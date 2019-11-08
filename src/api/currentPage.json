@@ -1,0 +1,32 @@
+{
+  "data": [],
+  "relations": {
+    "customers": [
+      {"id": 1, "name": "Customer 1"},
+      {"id": 2, "name": "Customer 2"},
+      {"id": 3, "name": "Customer 3"}
+    ],
+    "teamProfiles": [
+      {"id": 1, "name": "Team Profile 1"},
+      {"id": 2, "name": "Team Profile 2"},
+      {"id": 3, "name": "Team Profile 3"}
+    ],
+    "playerProfiles": [
+      {"id": 1, "name": "Player Profile 1"},
+      {"id": 2, "name": "Player Profile 2"},
+      {"id": 3, "name": "Player Profile 3"}
+    ],
+    "appType": [
+      {"id": 1, "name": "Type 1"},
+      {"id": 2, "name": "Type 2"}
+    ],
+    "appPlatform": [
+      {"id": 1, "name": "Platform 1"},
+      {"id": 2, "name": "Platform 2"}
+    ],
+    "appEnviroment": [
+      {"id": 1, "name": "Enviroment 1"},
+      {"id": 2, "name": "Enviroment 2"}
+    ]
+  }
+}
