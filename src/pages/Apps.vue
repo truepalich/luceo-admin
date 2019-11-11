@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Filters></Filters>
+    <Filters :data="dynamicCurrentData"></Filters>
 
     <v-data-table
       :headers="headers"
@@ -26,9 +26,9 @@
       </template>
     </v-data-table>
 
-    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
-    <CustomPermissionsDialog :data="currentData"></CustomPermissionsDialog>
-    <AddEditDialog :data="currentData"></AddEditDialog>
+    <ChangeLogoDialog :data="dynamicCurrentData"></ChangeLogoDialog>
+    <CustomPermissionsDialog :data="dynamicCurrentData"></CustomPermissionsDialog>
+    <AddEditDialog :data="dynamicCurrentData"></AddEditDialog>
 
   </div>
 </template>
@@ -49,6 +49,15 @@
 
       apps: [],
 
+      currentData: {
+        itemData: {},
+        dialogData: {
+          entity: 'App',
+          fields: [],
+        },
+        filterData: []
+      },
+
       headers: [
         { text: 'Icon', value: 'headshot', sortable: false },
         { text: 'Name', value: 'name' },
@@ -66,22 +75,23 @@
     },
 
     computed: {
-      currentData () {
-        let data = {
-          itemData: {},
-          dialogData: {
-            entity: 'App',
-            fields: [
-              { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
-              { key: "Type", type: "combobox", label: "Type", value: "", items: this.$store.getters.getCurrentRelationByKey('appType'), size: "" },
-              { key: "Platform", type: "combobox", label: "Platform", value: "", items: this.$store.getters.getCurrentRelationByKey('appPlatform'), size: "" },
-              { key: "Enviroment", type: "combobox", label: "Enviroment", value: "", items: this.$store.getters.getCurrentRelationByKey('appEnviroment'), size: "" },
-              { key: "Url", type: "text-field", label: "URL", value: "", items: "", size: "" },
-              { key: "AzureAppServiceName", type: "text-field", label: "Azure App Service Name", value: "", items: "", size: "" },
-            ],
-          },
-        }
-        return data
+      dynamicCurrentData () {
+        var currData = this.currentData;
+        currData.dialogData.fields = [
+          { key: "Name", type: "text-field", label: "Name", value: "" },
+          { key: "Type", type: "combobox", label: "Type", value: "", items: this.$store.getters.getCurrentRelationByKey('appType') },
+          { key: "Platform", type: "combobox", label: "Platform", value: "", items: this.$store.getters.getCurrentRelationByKey('appPlatform') },
+          { key: "Enviroment", type: "combobox", label: "Enviroment", value: "", items: this.$store.getters.getCurrentRelationByKey('appEnviroment') },
+          { key: "Url", type: "text-field", label: "URL", value: "" },
+          { key: "AzureAppServiceName", type: "text-field", label: "Azure App Service Name", value: "" },
+        ];
+        currData.filterData = [
+          { key: "search", type: "text-field", label: "Search", value: "", items: "", size: "2" },
+          { key: "typesPlatforms", type: "select", label: "Type/Platform", value: "", items: this.$store.getters.getCurrentFilterByKey('typesPlatforms'), size: "2" },
+          { key: "enviroments", type: "select", label: "Enviroment", value: "", items: this.$store.getters.getCurrentFilterByKey('enviroments'), size: "2" },
+          { key: "actions", type: "action", size: "4" },
+        ]
+        return currData;
       }
     },
 

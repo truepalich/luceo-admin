@@ -1,0 +1,11 @@
+{
+  "data": [],
+  "relations": {},
+  "filters": {
+    "status": [
+      {"id": 1, "name": "Customers - Status 1"},
+      {"id": 2, "name": "Customers - Status 2"},
+      {"id": 3, "name": "Customers - Status 3"}
+    ]
+  }
+}

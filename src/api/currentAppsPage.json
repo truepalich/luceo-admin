@@ -1,0 +1,29 @@
+{
+  "data": [],
+  "relations": {
+    "appType": [
+      {"id": 1, "name": "Type 1"},
+      {"id": 2, "name": "Type 2"}
+    ],
+    "appPlatform": [
+      {"id": 1, "name": "Platform 1"},
+      {"id": 2, "name": "Platform 2"}
+    ],
+    "appEnviroment": [
+      {"id": 1, "name": "Enviroment 1"},
+      {"id": 2, "name": "Enviroment 2"}
+    ]
+  },
+  "filters": {
+    "typesPlatforms": [
+      {"id": 1, "name": "Apps - Type 1"},
+      {"id": 2, "name": "Apps - Type 2"},
+      {"id": 3, "name": "Apps - Type 3"}
+    ],
+    "enviroments": [
+      {"id": 1, "name": "Apps - Enviroment 1"},
+      {"id": 2, "name": "Apps - Enviroment 2"},
+      {"id": 3, "name": "Apps - Enviroment 3"}
+    ]
+  }
+}

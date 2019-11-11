@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Filters></Filters>
+    <Filters :data="dynamicCurrentData"></Filters>
 
     <!--:options.sync="options"-->
     <!--:server-items-length="totalCustomers"-->
@@ -34,11 +34,11 @@
       </template>
     </v-data-table>
 
-    <AddEditDialog :data="currentData"></AddEditDialog>
-    <StatusDialog :data="currentData"></StatusDialog>
-    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
-    <ActiveUsersDialog :data="currentData"></ActiveUsersDialog>
-    <AdminUsersDialog :data="currentData"></AdminUsersDialog>
+    <AddEditDialog :data="dynamicCurrentData"></AddEditDialog>
+    <StatusDialog :data="dynamicCurrentData"></StatusDialog>
+    <ComingSoonDialog :data="dynamicCurrentData"></ComingSoonDialog>
+    <ActiveUsersDialog :data="dynamicCurrentData"></ActiveUsersDialog>
+    <AdminUsersDialog :data="dynamicCurrentData"></AdminUsersDialog>
 
   </div>
 </template>
@@ -62,6 +62,15 @@
         customers: [],
         totalCustomers: 0,
 
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Customer',
+            fields: [],
+          },
+          filterData: []
+        },
+
         headers: [
           { text: 'Name', align: 'left', value: 'name' },
           { text: 'Status', value: 'status' },
@@ -74,19 +83,19 @@
       }),
 
       computed: {
-        currentData () {
-          let data = {
-            itemData: {},
-            dialogData: {
-              entity: 'Customer',
-              fields: [
-                { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
-                { key: "HubSpotCompanyID", type: "text-field", label: "Hubspot Company Id", value: "", items: "", size: "" },
-                { key: "RenewalDate", type: "date", label: "Renewal Date", value: "", items: "", size: "" }
-              ],
-            },
-          }
-          return data
+        dynamicCurrentData () {
+          var currData = this.currentData;
+          currData.dialogData.fields = [
+            { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" },
+            { key: "HubSpotCompanyID", type: "text-field", label: "Hubspot Company Id", value: "", items: "", size: "" },
+            { key: "RenewalDate", type: "date", label: "Renewal Date", value: "", items: "", size: "" }
+          ];
+          currData.filterData = [
+            { key: "search", type: "text-field", label: "Search", value: "", items: "", size: "2" },
+            { key: "status", type: "select", label: "Status", value: "", items: this.$store.getters.getCurrentFilterByKey('status'), size: "2" },
+            { key: "actions", type: "action", size: "6" },
+          ]
+          return currData;
         }
       },
 

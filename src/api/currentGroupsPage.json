@@ -1,0 +1,17 @@
+{
+  "data": [],
+  "relations": {
+    "customers": [
+      {"id": 1, "name": "Customer 1"},
+      {"id": 2, "name": "Customer 2"},
+      {"id": 3, "name": "Customer 3"}
+    ]
+  },
+  "filters": {
+    "customers": [
+      {"id": 1, "name": "Groups - Customer 1"},
+      {"id": 2, "name": "Groups - Customer 2"},
+      {"id": 3, "name": "Groups - Customer 3"}
+    ]
+  }
+}

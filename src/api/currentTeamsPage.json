@@ -1,0 +1,27 @@
+{
+  "data": [],
+  "relations": {
+    "customers": [
+      {"id": 1, "name": "Customer 1"},
+      {"id": 2, "name": "Customer 2"},
+      {"id": 3, "name": "Customer 3"}
+    ],
+    "teamProfiles": [
+      {"id": 1, "name": "Teams Profile 1"},
+      {"id": 2, "name": "Teams Profile 2"},
+      {"id": 3, "name": "Teams Profile 3"}
+    ]
+  },
+  "filters": {
+    "customers": [
+      {"id": 1, "name": "Teams - Customer 1"},
+      {"id": 2, "name": "Teams - Customer 2"},
+      {"id": 3, "name": "Teams - Customer 3"}
+    ],
+    "leagues": [
+      {"id": 1, "name": "Teams - League 1"},
+      {"id": 2, "name": "Teams - League 2"},
+      {"id": 3, "name": "Teams - League 3"}
+    ]
+  }
+}

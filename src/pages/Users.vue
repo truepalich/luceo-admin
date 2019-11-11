@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Filters></Filters>
+    <Filters :data="dynamicCurrentData"></Filters>
 
     <v-data-table
       :headers="headers"
@@ -46,13 +46,13 @@
 
     </v-data-table>
 
-    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
-    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
-    <ActivityDialog :data="currentData"></ActivityDialog>
-    <StatusDialog :data="currentData"></StatusDialog>
-    <AppPermissionsDialog :data="currentData"></AppPermissionsDialog>
-    <TeamsRolesGroupsDialog :data="currentData"></TeamsRolesGroupsDialog>
-    <AddEditDialog :data="currentData"></AddEditDialog>
+    <ComingSoonDialog :data="dynamicCurrentData"></ComingSoonDialog>
+    <ChangeLogoDialog :data="dynamicCurrentData"></ChangeLogoDialog>
+    <ActivityDialog :data="dynamicCurrentData"></ActivityDialog>
+    <StatusDialog :data="dynamicCurrentData"></StatusDialog>
+    <AppPermissionsDialog :data="dynamicCurrentData"></AppPermissionsDialog>
+    <TeamsRolesGroupsDialog :data="dynamicCurrentData"></TeamsRolesGroupsDialog>
+    <AddEditDialog :data="dynamicCurrentData"></AddEditDialog>
 
   </div>
 </template>
@@ -80,6 +80,15 @@
 
       users: [],
 
+      currentData: {
+        itemData: {},
+        dialogData: {
+          entity: 'User',
+          fields: [],
+        },
+        filterData: []
+      },
+
       headers: [
         { text: 'Headshot', value: 'headshot', sortable: false },
         { text: 'Full Name', align: 'left', value: 'name' },
@@ -93,25 +102,30 @@
     }),
 
     computed: {
-      currentData () {
-        let data = {
-          itemData: {},
-          dialogData: {
-            entity: 'User',
-            fields: [
-              { key: "Email", type: "text-field", label: "Email", value: "", items: "", size: "" },
-              { type: "text-html", label: "If a user with this email already exists - prepopulate the form below + allow edit", size: "8" },
-              { type: "button", label: "Check", size: "4" },
-              { key: "CustomerID", type: "select", label: "Customers", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
-              { key: "User_Name", type: "text-field", label: "User name", value: "", items: "", size: "12" },
-              { key: "MobilePhone", type: "text-field", label: "Mob.Phone", value: "", items: "", size: "6" },
-              { key: "AltEmail", type: "text-field", label: "Alt.Email", value: "", items: "", size: "6" },
-              { key: "HubSpotId", type: "text-field", label: "HubSpot Cont. Id", value: "", items: "", size: "6" },
-              { key: "PlayerProfile", type: "combobox", label: "Player Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('playerProfiles'), size: "6" },
-            ],
-          },
-        }
-        return data
+      dynamicCurrentData () {
+        var currData = this.currentData;
+        currData.dialogData.fields = [
+          { key: "Email", type: "text-field", label: "Email", value: "", items: "",},
+          { type: "text-html", label: "If a user with this email already exists - prepopulate the form below + allow edit", size: "8" },
+          { type: "button", label: "Check", size: "4" },
+          { key: "CustomerID", type: "select", label: "Customers", value: "", items: this.$store.getters.getCurrentRelationByKey('customers') },
+          { key: "User_Name", type: "text-field", label: "User name", value: "", items: "" },
+          { key: "MobilePhone", type: "text-field", label: "Mob.Phone", value: "", items: "", size: "6" },
+          { key: "AltEmail", type: "text-field", label: "Alt.Email", value: "", items: "", size: "6" },
+          { key: "HubSpotId", type: "text-field", label: "HubSpot Cont. Id", value: "", items: "", size: "6" },
+          { key: "PlayerProfile", type: "combobox", label: "Player Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('playerProfiles'), size: "6" },
+        ],
+        currData.filterData = [
+          { key: "search", type: "text-field", label: "Search", value: "", items: "", size: "2" },
+          { key: "teams", type: "select", label: "Team", value: "", items: this.$store.getters.getCurrentFilterByKey('teams'), size: "1" },
+          { key: "status", type: "select", label: "Status", value: "", items: this.$store.getters.getCurrentFilterByKey('status'), size: "1" },
+          { key: "customers", type: "select", label: "Customer", value: "", items: this.$store.getters.getCurrentFilterByKey('customers'), size: "1" },
+          { key: "apps", type: "select", label: "App", value: "", items: this.$store.getters.getCurrentFilterByKey('apps'), size: "1" },
+          { key: "groups", type: "select", label: "Group", value: "", items: this.$store.getters.getCurrentFilterByKey('groups'), size: "1" },
+          { key: "roles", type: "select", label: "Role", value: "", items: this.$store.getters.getCurrentFilterByKey('roles'), size: "1" },
+          { key: "actions", type: "action", size: "2" },
+        ]
+        return currData;
       }
     },
 

@@ -1,0 +1,41 @@
+{
+  "data": [],
+  "relations": {
+    "customers": [
+      {"id": 1, "name": "Customer 1"},
+      {"id": 2, "name": "Customer 2"},
+      {"id": 3, "name": "Customer 3"}
+    ],
+    "playerProfiles": [
+      {"id": 1, "name": "Player Profile 1"},
+      {"id": 2, "name": "Player Profile 2"},
+      {"id": 3, "name": "Player Profile 3"}
+    ]
+  },
+  "filters": {
+    "teams": [
+      {"id": 1, "name": "Users - Team 1"},
+      {"id": 2, "name": "Users - Team 2"}
+    ],
+    "status": [
+      {"id": 1, "name": "Users - Status 1"},
+      {"id": 2, "name": "Users - Status 2"}
+    ],
+    "customers": [
+      {"id": 1, "name": "Users - Customer 1"},
+      {"id": 2, "name": "Users - Customer 2"}
+    ],
+    "apps": [
+      {"id": 1, "name": "Users - App 1"},
+      {"id": 2, "name": "Users - App 2"}
+    ],
+    "groups": [
+      {"id": 1, "name": "Users - Group 1"},
+      {"id": 2, "name": "Users - Group 2"}
+    ],
+    "roles": [
+      {"id": 1, "name": "Users - Role 1"},
+      {"id": 2, "name": "Users - Role 2"}
+    ]
+  }
+}

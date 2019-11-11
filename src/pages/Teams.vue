@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Filters></Filters>
+    <Filters :data="dynamicCurrentData"></Filters>
 
     <v-data-table
       :headers="headers"
@@ -41,13 +41,13 @@
       </template>
     </v-data-table>
 
-    <ComingSoonDialog :data="currentData"></ComingSoonDialog>
-    <LuceoSetupDialog :data="currentData"></LuceoSetupDialog>
-    <ColorSettingsDialog :data="currentData"></ColorSettingsDialog>
-    <CustomLocationsDialog :data="currentData"></CustomLocationsDialog>
-    <ChangeLogoDialog :data="currentData"></ChangeLogoDialog>
-    <ActiveUsersDialog :data="currentData"></ActiveUsersDialog>
-    <AddEditDialog :data="currentData"></AddEditDialog>
+    <ComingSoonDialog :data="dynamicCurrentData"></ComingSoonDialog>
+    <LuceoSetupDialog :data="dynamicCurrentData"></LuceoSetupDialog>
+    <ColorSettingsDialog :data="dynamicCurrentData"></ColorSettingsDialog>
+    <CustomLocationsDialog :data="dynamicCurrentData"></CustomLocationsDialog>
+    <ChangeLogoDialog :data="dynamicCurrentData"></ChangeLogoDialog>
+    <ActiveUsersDialog :data="dynamicCurrentData"></ActiveUsersDialog>
+    <AddEditDialog :data="dynamicCurrentData"></AddEditDialog>
 
   </div>
 </template>
@@ -74,6 +74,15 @@
 
         teams: [],
 
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Team',
+            fields: [],
+          },
+          filterData: []
+        },
+
         headers: [
           { text: 'Logo', value: 'headshot', align: 'left', sortable: false },
           { text: 'Team Name', value: 'name' },
@@ -88,19 +97,20 @@
       }),
 
       computed: {
-        currentData () {
-          let data = {
-            itemData: {},
-            dialogData: {
-              entity: 'Team',
-              fields: [
-                { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
-                { key: "TeamName", type: "text-field", label: "Name", value: "", items: "", size: "" },
-                { key: "TeamProfile", type: "combobox", label: "Team Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('teamProfiles'), size: "" }
-              ],
-            },
-          }
-          return data
+        dynamicCurrentData () {
+          var currData = this.currentData;
+          currData.dialogData.fields = [
+            { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers') },
+            { key: "TeamName", type: "text-field", label: "Name", value: "", items: "" },
+            { key: "TeamProfile", type: "combobox", label: "Team Profile", value: "", items: this.$store.getters.getCurrentRelationByKey('teamProfiles') }
+          ];
+          currData.filterData = [
+            { key: "search", type: "text-field", label: "Search", value: "", items: "", size: "2" },
+            { key: "customers", type: "select", label: "Customer", value: "", items: this.$store.getters.getCurrentFilterByKey('customers'), size: "2" },
+            { key: "leagues", type: "select", label: "League", value: "", items: this.$store.getters.getCurrentFilterByKey('leagues'), size: "2" },
+            { key: "actions", type: "action", size: "4" },
+          ]
+          return currData;
         }
       },
 

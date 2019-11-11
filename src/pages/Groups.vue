@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Filters></Filters>
+    <Filters :data="dynamicCurrentData"></Filters>
 
     <v-data-table
       :headers="headers"
@@ -17,8 +17,8 @@
       </template>
     </v-data-table>
 
-    <AddEditMembersDialog :data="currentData"></AddEditMembersDialog>
-    <AddEditDialog :data="currentData"></AddEditDialog>
+    <AddEditMembersDialog :data="dynamicCurrentData"></AddEditMembersDialog>
+    <AddEditDialog :data="dynamicCurrentData"></AddEditDialog>
 
   </div>
 </template>
@@ -38,6 +38,15 @@
 
         groups: [],
 
+        currentData: {
+          itemData: {},
+          dialogData: {
+            entity: 'Group',
+            fields: [],
+          },
+          filterData: []
+        },
+
         headers: [
           { text: 'Name', value: 'name', sortable: false },
           { text: 'Customer', value: 'customer' },
@@ -50,18 +59,18 @@
       },
 
       computed: {
-        currentData () {
-          let data = {
-            itemData: {},
-            dialogData: {
-              entity: 'Group',
-              fields: [
-                { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers'), size: "" },
-                { key: "Name", type: "text-field", label: "Name", value: "", items: "", size: "" }
-              ],
-            },
-          }
-          return data
+        dynamicCurrentData () {
+          var currData = this.currentData;
+          currData.dialogData.fields = [
+            { key: "CustomerID", type: "combobox", label: "Customer", value: "", items: this.$store.getters.getCurrentRelationByKey('customers')},
+            { key: "Name", type: "text-field", label: "Name", value: "", items: ""}
+          ],
+          currData.filterData = [
+            { key: "search", type: "text-field", label: "Search", value: "", items: "", size: "2" },
+            { key: "customers", type: "select", label: "Customer", value: "", items: this.$store.getters.getCurrentFilterByKey('customers'), size: "2" },
+            { key: "actions", type: "action", size: "6" },
+          ]
+          return currData;
         }
       },
 

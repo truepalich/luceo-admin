@@ -6,10 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentPageRelations: [],
+    currentPageFilters: [],
   },
   mutations: {
     setCurrentPageRelations (state, payload) {
       state.currentPageRelations = payload
+    },
+    setCurrentPageFilters (state, payload) {
+      state.currentPageFilters = payload
     },
   },
   getters: {
@@ -26,7 +30,20 @@ export default new Vuex.Store({
         }
         return relationResult
       }
-
-    }
+    },
+    getCurrentPageFilters: (state, getters) => {
+      return state.currentPageFilters;
+    },
+    getCurrentFilterByKey: (state, getters) => (key) => {
+      if (key) {
+        var filterResult = []
+        if (state.currentPageFilters[key]) {
+          state.currentPageFilters[key].forEach(function(item) {
+            filterResult.push(item.name)
+          })
+        }
+        return filterResult
+      }
+    },
   }
 })

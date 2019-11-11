@@ -8,9 +8,11 @@ export const Mixin = {
   },
   methods: {
     getOptionsForCurrentPage () {
-      this.axios.get('http://dev.itirra.com/luceo/admin/getCurrentPage.php')
+      const entity = this.currentData.dialogData.entity;
+      this.axios.get('http://dev.itirra.com/luceo/admin/getCurrent' + entity + 'sPage.php')
         .then((response) => {
           this.$store.commit('setCurrentPageRelations', response.data.relations)
+          this.$store.commit('setCurrentPageFilters', response.data.filters)
         })
         .catch(function (error) {
           // handle error
