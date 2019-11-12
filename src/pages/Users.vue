@@ -43,7 +43,6 @@
       <template v-slot:item.customers="{ item }">
         <a class="links--text" @click.prevent="showDialogAndTransferEvent(item, 'show-coming-soon-dialog')">{{ item.customers }}</a>
       </template>
-
     </v-data-table>
 
     <ComingSoonDialog :data="dynamicCurrentData"></ComingSoonDialog>

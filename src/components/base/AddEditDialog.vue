@@ -1,6 +1,9 @@
 <template>
   <v-dialog v-model="dialogAddEdit" max-width="500px">
-    <v-card>
+
+    <LoadingInDialog v-show="loading"></LoadingInDialog>
+
+    <v-card v-show="dialogContent">
       <v-card-title class="headline dialogHeader">
         <span class="headline" v-if="data.dialogData.entity">{{ addDialogView ? 'Add ' + data.dialogData.entity : 'Edit ' + data.dialogData.entity + ': ' + data.itemData.name }}</span>
       </v-card-title>
@@ -9,12 +12,12 @@
         <v-container>
           <v-row v-if="data.dialogData.fields.length > 0">
             <v-col cols="12" :sm="field.size ? field.size : '12'" :key="i" v-for="(field, i) in data.dialogData.fields">
-              <v-text-field v-if="field.type == 'text-field'" :label="field.label" :value="addDialogView ? '' : field.value"></v-text-field>
-              <v-combobox v-else-if="field.type == 'combobox'" :label="field.label" :value="addDialogView ? '' : field.value" :items="field.items"></v-combobox>
-              <v-select v-else-if="field.type == 'select'" attach chips multiple :label="field.label" :value="addDialogView ? '' : field.value" :items="field.items"></v-select>
-              <div v-else-if="field.type == 'text-html'">{{ field.label }}</div>
-              <v-btn v-else-if="field.type == 'button'" block color="dialogBut3">{{ field.label }}</v-btn>
-              <v-menu v-else-if="field.type == 'date'"
+
+              <component v-if="field.type == 'text-field' || field.type == 'combobox' || field.type == 'select'" :is="'v-' + field.type" :label="field.label" :value="addDialogView ? '' : field.value" :items="field.items"></component>
+
+              <div v-if="field.type == 'text-html'">{{ field.label }}</div>
+              <v-btn v-if="field.type == 'button'" block color="dialogBut3">{{ field.label }}</v-btn>
+              <v-menu v-if="field.type == 'date'"
                 ref="menu"
                 v-model="menu"
                 :close-on-content-click="false"
@@ -56,9 +59,14 @@
 </template>
 
 <script>
+  import {PreloaderInDialog} from "../../mixins/PreloaderInDialog";
+  import LoadingInDialog from "../LoadingInDialog";
+
   export default {
     name: "AddEditDialog",
+    components: {LoadingInDialog},
     props: ['data'],
+    mixins: [PreloaderInDialog],
     // watch: {
     //   data: function(newVal, oldVal) { // watch it
     //     // console.log('Prop changed: ', newVal, ' | was: ', oldVal)
@@ -81,7 +89,7 @@
       showDialogAdd() {
         this.addDialogView = true
         this.dialogAddEdit = true
-      }
+      },
     }
   }
 </script>

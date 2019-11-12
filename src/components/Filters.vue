@@ -2,7 +2,6 @@
   <v-card class="mb-4 filter-custom-box">
     <v-card-text class="pa-0">
 
-
       <v-row align="center" v-if="data.filterData.length > 0">
         <v-col cols="12" md="2">
           <div class="pl-4">
@@ -18,9 +17,7 @@
             <v-btn color="filterBut1" @click.prevent="showAddDialog()" class="ma-2 white--text ml-0" fab><v-icon>mdi-plus</v-icon></v-btn>
           </div>
         </v-col>
-
       </v-row>
-
 
     </v-card-text>
   </v-card>

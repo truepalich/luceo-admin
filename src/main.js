@@ -15,27 +15,27 @@ Vue.config.productionTip = false;
 const eventHub = new Vue();
 Vue.prototype.$eventHub = eventHub
 
-//
-// axios.interceptors.request.use(
-//   (request) => {
-//     eventHub.$emit('before-request')
-//     return request
-//   },
-//   (error) => {
-//     return Promise.reject(error)
-//   }
-// );
-//
-// axios.interceptors.response.use(
-//   (response) => {
-//     eventHub.$emit('after-response')
-//     return response
-//   },
-//   (error) => {
-//     eventHub.$emit('after-response')
-//     return Promise.reject(error)
-//   }
-// );
+
+axios.interceptors.request.use(
+  (request) => {
+    eventHub.$emit('before-request')
+    return request
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+);
+
+axios.interceptors.response.use(
+  (response) => {
+    eventHub.$emit('after-response')
+    return response
+  },
+  (error) => {
+    eventHub.$emit('after-response')
+    return Promise.reject(error)
+  }
+);
 
 
 /* eslint-disable no-new */

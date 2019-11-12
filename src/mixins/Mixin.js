@@ -23,14 +23,14 @@ export const Mixin = {
     showDialogAndTransferEvent (item, event, routeName, action) {
       const entity = this.currentData.dialogData.entity;
       if (action == 'add-edit') {
-        this.getAddEditData(entity)
+        this.getAddEditData(entity, item)
       }
       item.routeName = routeName;
       this.currentData.itemData = item;
       this.$eventHub.$emit(event);
     },
 
-    getAddEditData (entity) {
+    getAddEditData (entity, item) {
       this.axios.get('http://dev.itirra.com/luceo/admin/get' + entity + '.php')
         .then((response) => {
 
@@ -38,6 +38,12 @@ export const Mixin = {
             for (let [key, value] of Object.entries(response.data)) {
               if (field.key == key) {
                 field.value = value
+
+                // FOR PROMO
+                if (field.key == 'Name' || field.key == 'TeamName' || field.key == 'User_Name') {
+                  field.value = item.name
+                }
+                // FOR PROMO
               }
             }
           });
